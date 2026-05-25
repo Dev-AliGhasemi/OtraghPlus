@@ -1,0 +1,12 @@
+spring:
+  mongodb:
+    host: localhost
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/otragh_local_db?createDatabaseIfNotExist=true
+    username: ali
+    password: 123456

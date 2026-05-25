@@ -1,0 +1,6 @@
+spring:
+  mongodb:
+    host: otragh-mongodb
+    password: ${MONGODB_PASSWORD}
+    username: ${MONGODB_USERNAME}
+    port: ${MONGODB_PORT}

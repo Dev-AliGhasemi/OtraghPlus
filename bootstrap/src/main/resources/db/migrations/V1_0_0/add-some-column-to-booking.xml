@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="1768854467846-1" author="mrmoshkel">
+        <sql>
+      <![CDATA[
+            ALTER TABLE booking
+            ADD COLUMN booking_status VARCHAR(255) NOT NULL,
+            ADD COLUMN price_per_day        BIGINT       NOT NULL,
+            ADD COLUMN facilities_up_charge BIGINT       NOT NULL,
+            ADD COLUMN start_date           DATE         NOT NULL,
+            ADD COLUMN end_date             DATE         NOT NULL;
+            ]]>
+    </sql>
+        <rollback>
+            <sql>
+                <![CDATA[
+               ALTER TABLE your_table
+               DROP COLUMN booking_status,
+               DROP COLUMN price_per_day,
+               DROP COLUMN facilities_up_charge,
+               DROP COLUMN start_date,
+               DROP COLUMN end_date;
+          ]]>
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
