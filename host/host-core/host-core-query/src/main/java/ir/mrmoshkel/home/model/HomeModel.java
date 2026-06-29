@@ -6,10 +6,12 @@ import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.homefacilities.entity.HomeFacilities;
 import ir.mrmoshkel.valueobject.Price;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 public class HomeModel extends DataModel<Long> {

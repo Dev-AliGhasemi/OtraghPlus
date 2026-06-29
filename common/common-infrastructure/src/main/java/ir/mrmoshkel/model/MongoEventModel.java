@@ -1,7 +1,6 @@
 package ir.mrmoshkel.model;
 
 import ir.mrmoshkel.framework.BaseEventModel;
-import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.mongodb.core.mapping.Document;
 

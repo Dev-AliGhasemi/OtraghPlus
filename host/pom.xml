@@ -17,9 +17,11 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mapconstruct.version>1.6.0</mapconstruct.version>
+        <mapconstruct.lombok.binding.version>0.2.0</mapconstruct.lombok.binding.version>
+        <spring.boot.version>4.0.6</spring.boot.version>
     </properties>
+
 
 </project>

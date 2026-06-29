@@ -1,20 +1,25 @@
 package ir.mrmoshkel.framework;
 
 import ir.mrmoshkel.framework.event.BaseEvent;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @SuperBuilder
 public class BaseEventModel<AGG_ID> {
-    private Long id;
-    private Date timestamp;
-    private String aggregateType;
-    private AGG_ID aggregateId;
-    private String eventType;
-    private long version;
-    private BaseEvent eventData;
+    @Id
+    protected String id;
+    protected Date timestamp;
+    protected String aggregateType;
+    protected AGG_ID aggregateId;
+    protected String eventType;
+    protected long version;
+    protected BaseEvent eventData;
 }

@@ -9,6 +9,7 @@ import ir.mrmoshkel.framework.entity.AggregateRoot;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements EventSource<T, ID> {
 
@@ -46,7 +47,13 @@ public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements Event
             if (accountAggregate == null) continue;
             List<BaseEvent> events = eventStore.getEvents(aggregateId);
             for (BaseEvent event : events) {
-                eventProducer.produce(event.getClass().getSimpleName(), event);
+                try {
+                    eventProducer.produce(event.getClass().getSimpleName(), event);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

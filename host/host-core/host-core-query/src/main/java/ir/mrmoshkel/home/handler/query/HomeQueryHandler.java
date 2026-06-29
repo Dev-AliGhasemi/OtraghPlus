@@ -16,6 +16,8 @@ public class HomeQueryHandler implements QueryHandler {
     }
 
     public List<HomeModel> handle(FindAllHomeQuery findAllHomeQuery) {
+        if (findAllHomeQuery.getOffset() != null && findAllHomeQuery.getPageSize() != null)
+            return homeRepository.findAll(findAllHomeQuery.getOffset(), findAllHomeQuery.getPageSize());
         return homeRepository.findAll();
     }
 

@@ -1,4 +1,4 @@
-package ir.mrmoshkel.persistence.framework;
+package ir.mrmoshkel.framework;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

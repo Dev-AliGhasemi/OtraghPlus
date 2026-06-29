@@ -6,14 +6,14 @@ import ir.mrmoshkel.homefacilities.entity.HomeFacilities;
 import ir.mrmoshkel.valueobject.Price;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Getter
+@SuperBuilder
 public class CreateHomeCommand extends BaseCommand<Long> {
     private Long hostId;
     private Price pricePerNight;
     private Address address;
-    private List<HomeFacilities> facilities;
 }

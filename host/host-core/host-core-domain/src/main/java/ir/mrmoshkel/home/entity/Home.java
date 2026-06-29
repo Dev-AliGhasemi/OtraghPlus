@@ -26,7 +26,9 @@ public class Home extends AggregateRoot<Long> {
     private Address address;
     private ReserveState reserveState;
 
-    private Home(Long hostId, Price pricePerNight, Address address, List<HomeFacilities> homeFacilities) {
+    private Home(Long hostId, Price pricePerNight, Address address) {
+        //TODO generate id
+        id = 1L;
         raiseEvent(HomeCreatedEvent.builder().hostId(hostId).price(pricePerNight).address(address).build());
     }
 
@@ -34,8 +36,7 @@ public class Home extends AggregateRoot<Long> {
         if (Objects.isNull(createHomeCommand) || Objects.isNull(createHomeCommand.getHostId()) ||
                 Objects.isNull(createHomeCommand.getAddress()) || Objects.isNull(createHomeCommand.getPricePerNight()))
             throw new IllegalStateException("Can not be null");
-        return new Home(createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress(),
-                createHomeCommand.getFacilities());
+        return new Home(createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
     }
 
     public void reserveHome() {
