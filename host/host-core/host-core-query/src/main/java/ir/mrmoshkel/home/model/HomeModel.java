@@ -5,6 +5,7 @@ import ir.mrmoshkel.home.enumeration.ReserveState;
 import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.homefacilities.entity.HomeFacilities;
 import ir.mrmoshkel.valueobject.Price;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
@@ -18,5 +19,6 @@ public class HomeModel extends DataModel<Long> {
     private Long hostId;
     private Price pricePerNight;
     private Address address;
-    private ReserveState reserveState;
+    @Builder.Default
+    private ReserveState reserveState = ReserveState.READY_TO_RESERVED;
 }

@@ -5,3 +5,4 @@ spring:
       - jpa
       - liquibase
       - kafka
+      - otragh

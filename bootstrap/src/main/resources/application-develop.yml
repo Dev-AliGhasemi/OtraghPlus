@@ -14,5 +14,5 @@ spring:
 
 logging:
   level:
-    org.springframework.kafka: DEBUG
-    org.apache.kafka.clients.consumer: DEBUG
+    org.springframework.kafka: ERROR
+    org.apache.kafka.clients.consumer: ERROR

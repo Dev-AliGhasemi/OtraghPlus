@@ -1,6 +1,6 @@
-package ir.mrmoshkel.endpoint.home.mapper;
+package ir.mrmoshkel.endpoint.home.v1.mapper;
 
-import ir.mrmoshkel.endpoint.home.dto.HomeDto;
+import ir.mrmoshkel.endpoint.home.v1.dto.HomeDto;
 import ir.mrmoshkel.framework.BaseMapper;
 import ir.mrmoshkel.home.model.HomeModel;
 import org.mapstruct.Mapper;

@@ -13,10 +13,12 @@ public interface HomeJpaMapper extends BaseMapper {
     HomeJpaMapper INSTANCE = Mappers.getMapper(HomeJpaMapper.class);
     @Mapping(source = "pricePerNight", target = "pricePerNight.price")
     @Mapping(source = "address", target = "address.street")
+    @Mapping(source = "host.id", target = "hostId")
     HomeModel toModel(HomeEntity entity);
 
     @Mapping(source = "pricePerNight.price", target = "pricePerNight")
     @Mapping(source = "address.street", target = "address")
+    @Mapping(source = "hostId", target = "host.id")
     HomeEntity toEntity(HomeModel homeModel);
 
 }

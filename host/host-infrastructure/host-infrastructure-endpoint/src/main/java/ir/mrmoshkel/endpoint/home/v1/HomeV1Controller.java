@@ -1,7 +1,9 @@
-package ir.mrmoshkel.endpoint.home;
+package ir.mrmoshkel.endpoint.home.v1;
 
-import ir.mrmoshkel.endpoint.home.dto.HomeDto;
-import ir.mrmoshkel.endpoint.home.mapper.HomeMapper;
+import ir.mrmoshkel.endpoint.home.v1.dto.HomeDto;
+import ir.mrmoshkel.endpoint.home.v1.mapper.HomeMapper;
+import ir.mrmoshkel.endpoint.validation.OnCreate;
+import ir.mrmoshkel.endpoint.validation.OnUpdate;
 import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.home.command.ReserveHomeCommand;
@@ -19,12 +21,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user/home")
+@Validated
 public class HomeV1Controller {
 
     private final HomeQueryHandler homeQueryHandler;
@@ -55,9 +59,9 @@ public class HomeV1Controller {
 
     @PostMapping
     //TODO use validation for DTO
-    public void createHome(@RequestBody HomeDto homeDto) {
+    public void createHome(@Validated(OnCreate.class) @RequestBody HomeDto homeDto) {
         homeCommandHandler.handle(CreateHomeCommand.builder().hostId(homeDto.getHostId()).pricePerNight(new Price(homeDto.getPricePerNight()))
-                .address(new Address(homeDto.getAddress(),null,null,null,null)).build());
+                .address(new Address(homeDto.getAddress(), null, null, null, null)).build());
     }
 
     @DeleteMapping("/{homeId}")
@@ -71,9 +75,9 @@ public class HomeV1Controller {
     }
 
     @PutMapping("/{homeId}")
-    public void updateHome(@PathVariable Long homeId, @RequestBody HomeDto homeDto) {
+    public void updateHome(@PathVariable Long homeId, @Validated(OnUpdate.class) @RequestBody HomeDto homeDto) {
         homeCommandHandler.handle(UpdateHomeCommand.builder().id(homeId)
                 .pricePerNight(new Price(homeDto.getPricePerNight()))
-                .address(new Address(homeDto.getAddress(),null,null,null,null)).build());
+                .address(new Address(homeDto.getAddress(), null, null, null, null)).build());
     }
 }
