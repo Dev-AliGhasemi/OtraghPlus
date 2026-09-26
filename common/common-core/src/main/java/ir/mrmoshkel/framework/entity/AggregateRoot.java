@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuperBuilder
@@ -16,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class AggregateRoot<ID> extends BaseEntity<ID> {
 
-    private List<BaseEvent> events;
+    private List<BaseEvent> events = new ArrayList<>();
     private static final boolean NEW_EVENT = true;
     @Setter
     private Long version;

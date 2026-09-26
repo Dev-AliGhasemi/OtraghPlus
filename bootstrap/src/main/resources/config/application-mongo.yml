@@ -1,6 +1,3 @@
 spring:
   mongodb:
-    host: otragh-mongodb
-    password: ${MONGODB_PASSWORD}
-    username: ${MONGODB_USERNAME}
-    port: ${MONGODB_PORT}
+    uri: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@otragh-mongodb:27017/${MONGODB_DATABASE}?authSource=${MONGODB_AUTH_DB:admin}

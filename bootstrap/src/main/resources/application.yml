@@ -4,3 +4,4 @@ spring:
       - mongodb
       - jpa
       - liquibase
+      - kafka

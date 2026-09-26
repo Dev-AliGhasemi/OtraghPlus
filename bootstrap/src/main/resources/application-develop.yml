@@ -1,6 +1,6 @@
 spring:
   mongodb:
-    host: localhost
+    uri: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@localhost:27017/${MONGODB_DATABASE}?authSource=${MONGODB_AUTH_DB:admin}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
@@ -10,3 +10,8 @@ spring:
     url: jdbc:mysql://localhost:3306/otragh_local_db?createDatabaseIfNotExist=true
     username: ali
     password: 123456
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG
+    org.apache.kafka.clients.consumer: DEBUG

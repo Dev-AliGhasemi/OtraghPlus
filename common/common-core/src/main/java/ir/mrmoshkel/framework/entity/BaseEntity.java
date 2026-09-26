@@ -10,6 +10,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public abstract class BaseEntity<ID> {
     @EqualsAndHashCode.Include
-    private ID id;
-    private AuditDetail auditDetail;
+    protected ID id;
+    protected AuditDetail auditDetail;
 }
