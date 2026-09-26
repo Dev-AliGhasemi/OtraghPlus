@@ -4,10 +4,12 @@ import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.valueobject.Price;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
+@NoArgsConstructor
 public class HomeCreatedEvent extends BaseEvent {
     private Long hostId;
     private Price price;

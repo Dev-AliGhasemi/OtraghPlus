@@ -4,7 +4,8 @@ import ir.mrmoshkel.home.model.HomeModel;
 import ir.mrmoshkel.home.repository.HomeRepository;
 import ir.mrmoshkel.persistence.framework.RepositoryAdapter;
 import ir.mrmoshkel.persistence.home.entity.HomeEntity;
-import ir.mrmoshkel.persistence.home.mapper.HomeMapper;
+import ir.mrmoshkel.persistence.home.mapper.HomeJpaMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, Long, HomeMapper> implements HomeRepository {
+public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, Long, HomeJpaMapper> implements HomeRepository {
 
     public HomeRepositoryAdapter(HomeJpaRepository homeJpaRepository) {
-        super(homeJpaRepository, HomeMapper.INSTANCE);
+        super(homeJpaRepository, HomeJpaMapper.INSTANCE);
     }
 
     @Override
@@ -28,6 +29,14 @@ public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, Long, H
     @Override
     public List<HomeModel> findAll() {
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(getRepository().findAll().iterator(), 0), false)
+                .map(getMapper()::toModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HomeModel> findAll(Long offset, Integer pageSize) {
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(((HomeJpaRepository) getRepository())
+                        .findAll(PageRequest.of((int) (offset/pageSize), pageSize)).iterator(), 0), false)
                 .map(getMapper()::toModel)
                 .collect(Collectors.toList());
     }

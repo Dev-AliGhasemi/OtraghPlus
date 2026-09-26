@@ -13,6 +13,5 @@ public class HomeDto {
     private Long hostId;
     private Long pricePerNight;
     private String address;
-    private List<Long> homeFacilitiesId;
     private String reserveState;
 }

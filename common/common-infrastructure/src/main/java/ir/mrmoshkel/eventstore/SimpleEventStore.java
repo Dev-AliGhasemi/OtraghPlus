@@ -10,32 +10,45 @@ import ir.mrmoshkel.model.MongoEventModel;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class SimpleEventStore implements EventStore {
 
-    private EventStoreRepository eventStoreRepository;
-    private EventProducer eventProducer;
+    private final EventStoreRepository eventStoreRepository;
+    private final EventProducer eventProducer;
+
+    public SimpleEventStore(EventStoreRepository eventStoreRepository, EventProducer eventProducer) {
+        this.eventStoreRepository = eventStoreRepository;
+        this.eventProducer = eventProducer;
+    }
 
     @Override
-    public <ID> void saveEvent(AggregateRoot<ID> aggregateRoot, List<BaseEvent> events, long expectedVersion) {
+    public <ID> void saveEvent(AggregateRoot<ID> aggregateRoot, List<BaseEvent> events, Long expectedVersion) {
         List<MongoEventModel<ID>> mongoEventModels = eventStoreRepository.findByAggregateId(aggregateRoot.getId());
-        if (Objects.isNull(mongoEventModels) || mongoEventModels.get(mongoEventModels.size() - 1).getVersion() != expectedVersion)
+        if (Objects.isNull(mongoEventModels) || (!mongoEventModels.isEmpty() && mongoEventModels.get(mongoEventModels.size() - 1).getVersion() != expectedVersion))
             throw new RuntimeException("Concurrency error");
-        long version = expectedVersion;
+        Long version = expectedVersion == null ? 0 : expectedVersion;
         for (BaseEvent baseEvent : events) {
             version++;
             baseEvent.setVersion(version);
-            MongoEventModel mongoEventModel = (MongoEventModel) MongoEventModel.builder()
+            MongoEventModel mongoEventModel = MongoEventModel.builder()
                     .timestamp(new Date(System.currentTimeMillis()))
                     .aggregateId(aggregateRoot.getId())
                     .version(version)
-                    .aggregateType(AggregateRoot.class.getTypeName())
+                    .aggregateType(aggregateRoot.getClass().getTypeName())
                     .eventType(baseEvent.getClass().getTypeName())
                     .eventData(baseEvent)
                     .build();
             MongoEventModel saved = eventStoreRepository.save(mongoEventModel);
-            if (Objects.nonNull(saved.getId()))
-                eventProducer.produce(baseEvent.getClass().getSimpleName(), baseEvent);
+            if (Objects.nonNull(saved.getId())) {
+                try {
+                    eventProducer.produce(baseEvent.getClass().getSimpleName(), baseEvent);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 

@@ -1,10 +1,14 @@
 package ir.mrmoshkel.home.query;
 
 import ir.mrmoshkel.framework.query.BaseQuery;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor
 @Getter
+@SuperBuilder
 public class FindAllHomeQuery extends BaseQuery<Long> {
+    private Long offset;
+    private Integer pageSize;
 }
