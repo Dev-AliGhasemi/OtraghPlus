@@ -9,10 +9,11 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @SuperBuilder
-public class CreateHomeCommand extends BaseCommand<Long> {
+public class CreateHomeCommand extends BaseCommand<UUID> {
     private Long hostId;
     private Price pricePerNight;
     private Address address;

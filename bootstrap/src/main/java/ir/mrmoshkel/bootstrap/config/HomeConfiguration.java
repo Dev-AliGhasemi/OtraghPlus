@@ -1,6 +1,7 @@
 package ir.mrmoshkel.bootstrap.config;
 
 import ir.mrmoshkel.contract.EventSource;
+import ir.mrmoshkel.contract.IdGenerator;
 import ir.mrmoshkel.eventproducer.KafkaEventProducer;
 import ir.mrmoshkel.eventsource.SimpleEventSource;
 import ir.mrmoshkel.eventstore.EventStoreRepository;
@@ -12,9 +13,12 @@ import ir.mrmoshkel.home.entity.Home;
 import ir.mrmoshkel.home.handler.command.home.command.handler.HomeCommandHandler;
 import ir.mrmoshkel.home.handler.event.HomeEventHandler;
 import ir.mrmoshkel.home.handler.query.HomeQueryHandler;
+import ir.mrmoshkel.idgenerator.UUIDGenerator;
 import ir.mrmoshkel.persistence.home.repository.HomeRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.UUID;
 
 @Configuration
 public class HomeConfiguration {
@@ -24,8 +28,13 @@ public class HomeConfiguration {
     }
 
     @Bean
-    public HomeCommandHandler homeCommandHandler(EventSource<Home,Long> eventSource) {
-        return new HomeCommandHandler(eventSource);
+    public HomeCommandHandler homeCommandHandler(EventSource<Home,Long> eventSource, IdGenerator<UUID> idGenerator) {
+        return new HomeCommandHandler(eventSource, idGenerator);
+    }
+
+    @Bean
+    public IdGenerator<UUID> uuidGenerator() {
+        return new UUIDGenerator();
     }
 
     @Bean

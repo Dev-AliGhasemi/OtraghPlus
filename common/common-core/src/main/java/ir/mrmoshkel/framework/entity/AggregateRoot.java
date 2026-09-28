@@ -10,9 +10,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @EqualsAndHashCode(callSuper = true)
 public class AggregateRoot<ID> extends BaseEntity<ID> {
@@ -21,6 +18,11 @@ public class AggregateRoot<ID> extends BaseEntity<ID> {
     private static final boolean NEW_EVENT = true;
     @Setter
     private Long version;
+
+    public AggregateRoot(String name) {
+        super(name);
+    }
+
 
     public void markEventsAsCommited() {
         events.clear();

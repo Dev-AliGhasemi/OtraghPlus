@@ -26,7 +26,8 @@ public class User extends AggregateRoot<Long> {
     private Email email;
     private PhoneNumber phoneNumber;
 
-    private User(String firstName, String lastName, String username, Password password, Email email, PhoneNumber phoneNumber){
+    private User(String name, String firstName, String lastName, String username, Password password, Email email, PhoneNumber phoneNumber){
+        super(name);
         raiseEvent(UserCreatedEvent.builder().firstName(firstName).lastName(lastName).username(username).password(password)
                 .email(email).phoneNumber(phoneNumber).build());
     }

@@ -26,17 +26,21 @@ public class Home extends AggregateRoot<Long> {
     private Address address;
     private ReserveState reserveState;
 
-    private Home(Long hostId, Price pricePerNight, Address address) {
-        //TODO generate id
-        id = 1L;
+    private Home(String name, Long hostId, Price pricePerNight, Address address) {
+        super(name);
         raiseEvent(HomeCreatedEvent.builder().hostId(hostId).price(pricePerNight).address(address).build());
     }
 
     public static Home createHome(CreateHomeCommand createHomeCommand) {
-        if (Objects.isNull(createHomeCommand) || Objects.isNull(createHomeCommand.getHostId()) ||
-                Objects.isNull(createHomeCommand.getAddress()) || Objects.isNull(createHomeCommand.getPricePerNight()))
-            throw new IllegalStateException("Can not be null");
-        return new Home(createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
+        if(Objects.isNull(createHomeCommand))
+            throw new IllegalArgumentException("Create home command can't be null");
+        else if (Objects.isNull(createHomeCommand.getPricePerNight()))
+            throw new IllegalArgumentException("Price per night can't be null");
+        else if (Objects.isNull(createHomeCommand.getAddress()))
+            throw new IllegalArgumentException("Address can't be null");
+        else if (Objects.isNull(createHomeCommand.getHostId()))
+            throw new IllegalArgumentException("HostId can't be null");
+        return new Home(Home.class.getName(), createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
     }
 
     public void reserveHome() {
