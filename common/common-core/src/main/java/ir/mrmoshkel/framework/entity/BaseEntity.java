@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SuperBuilder
 public abstract class BaseEntity<ID> {
     @EqualsAndHashCode.Include

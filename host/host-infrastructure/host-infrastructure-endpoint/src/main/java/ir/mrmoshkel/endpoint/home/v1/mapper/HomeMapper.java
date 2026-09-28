@@ -2,6 +2,7 @@ package ir.mrmoshkel.endpoint.home.v1.mapper;
 
 import ir.mrmoshkel.endpoint.home.v1.dto.HomeDto;
 import ir.mrmoshkel.framework.BaseMapper;
+import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.model.HomeModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,5 +20,8 @@ public interface HomeMapper extends BaseMapper {
     @Mapping(source = "pricePerNight", target = "pricePerNight.price")
     @Mapping(source = "address", target = "address.street")
     HomeModel toHomeModel(HomeDto homeDto);
+
+    @Mapping(source = "pricePerNight", target = "pricePerNight.price")
+    CreateHomeCommand toCreateHomeCommand(HomeDto homeDto);
 
 }
