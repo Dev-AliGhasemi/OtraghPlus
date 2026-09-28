@@ -28,11 +28,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user/home")
-@Validated
 public class HomeV1Controller {
 
+    //TODO command dispatcher to prevent inject many handlers
     private final HomeQueryHandler homeQueryHandler;
     private final HomeCommandHandler homeCommandHandler;
+
     private final HomeMapper homeMapper;
 
     public HomeV1Controller(HomeQueryHandler homeQueryHandler, HomeCommandHandler homeCommandHandler,
@@ -58,10 +59,8 @@ public class HomeV1Controller {
     }
 
     @PostMapping
-    //TODO use validation for DTO
     public void createHome(@Validated(OnCreate.class) @RequestBody HomeDto homeDto) {
-        homeCommandHandler.handle(CreateHomeCommand.builder().hostId(homeDto.getHostId()).pricePerNight(new Price(homeDto.getPricePerNight()))
-                .address(new Address(homeDto.getAddress(), null, null, null, null)).build());
+        homeCommandHandler.handle(homeMapper.toCreateHomeCommand(homeDto));
     }
 
     @DeleteMapping("/{homeId}")
