@@ -15,10 +15,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @SuperBuilder
-public class User extends AggregateRoot<Long> {
+public class User extends AggregateRoot<UUID> {
     private String firstName;
     private String lastName;
     private String username;
@@ -26,15 +27,15 @@ public class User extends AggregateRoot<Long> {
     private Email email;
     private PhoneNumber phoneNumber;
 
-    private User(String name, String firstName, String lastName, String username, Password password, Email email, PhoneNumber phoneNumber){
-        super(name);
+    private User(UUID id, String name, String firstName, String lastName, String username, Password password, Email email, PhoneNumber phoneNumber){
+        super(id, name);
         raiseEvent(UserCreatedEvent.builder().firstName(firstName).lastName(lastName).username(username).password(password)
                 .email(email).phoneNumber(phoneNumber).build());
     }
 
     public static User createUser(CreateUserCommand createUserCommand) {
         //TODO validation have to be done
-        return new User(createUserCommand.getFirstName(), createUserCommand.getLastName(), createUserCommand.getUsername(),
+        return new User(createUserCommand.getId(), User.class.getName(), createUserCommand.getFirstName(), createUserCommand.getLastName(), createUserCommand.getUsername(),
                 createUserCommand.getPassword(), createUserCommand.getEmail(), createUserCommand.getPhoneNumber());
     }
 

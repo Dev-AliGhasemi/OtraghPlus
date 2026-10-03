@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @SuperBuilder
-public class HomeUpdatedEvent extends BaseEvent {
+public class HomeUpdatedEvent extends HomeEvent {
     private Price price;
     private Address address;
 }

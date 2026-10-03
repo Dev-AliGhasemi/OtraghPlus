@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-public class HomeCreatedEvent extends BaseEvent {
+public class HomeCreatedEvent extends HomeEvent {
     private Long hostId;
     private Price price;
     private Address address;

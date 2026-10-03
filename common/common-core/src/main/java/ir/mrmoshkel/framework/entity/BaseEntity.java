@@ -14,8 +14,17 @@ public abstract class BaseEntity<ID> {
 
     protected AuditDetail auditDetail;
 
-    public BaseEntity(String name) {
+    public BaseEntity(ID id, String name) {
         this.name = name;
+        this.id = id;
+
+    }
+
+    public void validate() {
+        if (id == null)
+            throw new IllegalArgumentException("id is null");
+        else if (name == null)
+            throw new IllegalArgumentException("name is null");
     }
 
     public String getCode(){

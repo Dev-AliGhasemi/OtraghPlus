@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class CreateUserCommand extends BaseCommand<Long> {
+public class CreateUserCommand extends UserCommand {
     private String firstName;
     private String lastName;
     private String username;

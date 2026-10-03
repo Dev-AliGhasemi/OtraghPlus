@@ -7,5 +7,5 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class HomeReservedEvent extends BaseEvent {
+public class HomeReservedEvent extends HomeEvent {
 }

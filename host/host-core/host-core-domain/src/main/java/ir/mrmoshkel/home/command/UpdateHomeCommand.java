@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @SuperBuilder
-public class UpdateHomeCommand extends BaseCommand<Long> {
+public class UpdateHomeCommand extends HomeCommand {
     private Price pricePerNight;
     private Address address;
 }

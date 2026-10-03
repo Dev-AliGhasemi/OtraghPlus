@@ -19,8 +19,8 @@ public class AggregateRoot<ID> extends BaseEntity<ID> {
     @Setter
     private Long version;
 
-    public AggregateRoot(String name) {
-        super(name);
+    public AggregateRoot(ID id, String name) {
+        super(id, name);
     }
 
 

@@ -9,5 +9,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class BaseCommand<ID> {
-    protected ID id;
+    private ID id;
 }

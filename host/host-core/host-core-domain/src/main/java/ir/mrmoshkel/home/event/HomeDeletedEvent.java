@@ -6,6 +6,6 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class HomeDeletedEvent extends BaseEvent {
+public class HomeDeletedEvent extends HomeEvent {
 
 }
