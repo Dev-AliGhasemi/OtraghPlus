@@ -8,5 +8,5 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class FindByIdHomeQuery extends BaseQuery<Long> {
+public class FindByIdHomeQuery extends HomeQuery {
 }

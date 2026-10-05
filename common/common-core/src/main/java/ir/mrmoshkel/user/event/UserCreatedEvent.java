@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class UserCreatedEvent extends BaseEvent {
+public class UserCreatedEvent extends UserEvent {
     private String firstName;
     private String lastName;
     private String username;

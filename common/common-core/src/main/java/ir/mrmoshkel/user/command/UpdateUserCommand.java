@@ -1,14 +1,13 @@
 package ir.mrmoshkel.user.command;
 
-import ir.mrmoshkel.framework.command.BaseCommand;
 import ir.mrmoshkel.user.valueobject.Email;
 import ir.mrmoshkel.user.valueobject.Password;
 import ir.mrmoshkel.user.valueobject.PhoneNumber;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
 @Getter
+@SuperBuilder
 public class UpdateUserCommand extends UserCommand {
     private String firstName;
     private String lastName;

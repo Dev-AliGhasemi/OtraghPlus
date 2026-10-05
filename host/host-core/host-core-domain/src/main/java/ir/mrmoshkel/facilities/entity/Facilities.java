@@ -11,8 +11,6 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
 public class Facilities extends AggregateRoot<Long> {
     private String name;

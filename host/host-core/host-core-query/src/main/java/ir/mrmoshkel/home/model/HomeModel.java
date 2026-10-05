@@ -11,11 +11,12 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
-public class HomeModel extends DataModel<Long> {
+public class HomeModel extends DataModel<UUID> {
     private Long hostId;
     private Price pricePerNight;
     private Address address;

@@ -9,7 +9,6 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-@NoArgsConstructor
 public class HomeCreatedEvent extends HomeEvent {
     private Long hostId;
     private Price price;

@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class FindAllHomeQuery extends BaseQuery<Long> {
+public class FindAllHomeQuery extends HomeQuery {
     private Long offset;
     private Integer pageSize;
 }

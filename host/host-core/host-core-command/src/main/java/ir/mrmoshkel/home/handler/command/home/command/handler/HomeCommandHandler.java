@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class HomeCommandHandler implements CommandHandler {
 
-    private EventSource<Home,Long> eventSource;
+    private EventSource<Home,UUID> eventSource;
     private IdGenerator<UUID> idGenerator;
 
     public void handle(CreateHomeCommand createHomeCommand) {

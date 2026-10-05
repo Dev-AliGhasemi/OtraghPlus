@@ -12,6 +12,7 @@ import java.util.List;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class AggregateRoot<ID> extends BaseEntity<ID> {
 
     private List<BaseEvent> events = new ArrayList<>();

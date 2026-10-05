@@ -5,10 +5,14 @@ import ir.mrmoshkel.framework.command.CommandHandler;
 import ir.mrmoshkel.user.command.CreateUserCommand;
 import ir.mrmoshkel.user.command.UpdateUserCommand;
 import ir.mrmoshkel.user.entity.User;
+import lombok.AllArgsConstructor;
 
+import java.util.UUID;
+
+@AllArgsConstructor
 public class UserCommandHandler implements CommandHandler {
 
-    private EventSource<User,Long> eventSource;
+    private EventSource<User, UUID> eventSource;
 
     protected void handle(CreateUserCommand createUserCommand) {
         User home = User.createUser(createUserCommand);

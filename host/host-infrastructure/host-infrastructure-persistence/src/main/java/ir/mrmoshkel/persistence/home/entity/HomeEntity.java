@@ -8,12 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Table(name = "homes")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class HomeEntity extends BaseEntity<Long> {
+public class HomeEntity extends BaseEntity<UUID> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "host_id", nullable = false, updatable = false)
     private UserEntity host;
