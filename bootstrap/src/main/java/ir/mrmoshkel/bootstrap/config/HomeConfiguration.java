@@ -28,7 +28,7 @@ public class HomeConfiguration {
     }
 
     @Bean
-    public HomeCommandHandler homeCommandHandler(EventSource<Home,Long> eventSource, IdGenerator<UUID> idGenerator) {
+    public HomeCommandHandler homeCommandHandler(EventSource<Home,UUID> eventSource, IdGenerator<UUID> idGenerator) {
         return new HomeCommandHandler(eventSource, idGenerator);
     }
 
@@ -38,7 +38,7 @@ public class HomeConfiguration {
     }
 
     @Bean
-    public EventSource<Home,Long> homeEventSource(EventStore eventStore, EventProducer eventProducer) {
+    public EventSource<Home,UUID> homeEventSource(EventStore eventStore, EventProducer eventProducer) {
         return new SimpleEventSource<>(eventStore, eventProducer);
     }
 

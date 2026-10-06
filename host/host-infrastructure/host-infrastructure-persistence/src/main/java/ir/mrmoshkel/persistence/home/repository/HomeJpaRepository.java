@@ -11,13 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
-public interface HomeJpaRepository extends JpaRepository<HomeEntity, Long> {
+import java.util.UUID;
 
-    @Transactional
+@Repository
+public interface HomeJpaRepository extends JpaRepository<HomeEntity, UUID> {
+
     @Query("UPDATE HomeEntity home SET home.reserveState = :reserveState WHERE home.id = :id")
     @Modifying
-    void reserve(@Param("id") Long id, @Param("reserveState") ReserveState reserveState);
+    void reserve(@Param("id") UUID id, @Param("reserveState") ReserveState reserveState);
 
     Page<HomeEntity> findAll(Pageable pageable);
 

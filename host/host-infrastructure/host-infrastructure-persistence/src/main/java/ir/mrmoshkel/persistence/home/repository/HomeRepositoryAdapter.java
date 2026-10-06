@@ -11,19 +11,20 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.Spliterators;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, Long, HomeJpaMapper> implements HomeRepository {
+public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, UUID, HomeJpaMapper> implements HomeRepository {
 
     public HomeRepositoryAdapter(HomeJpaRepository homeJpaRepository) {
         super(homeJpaRepository, HomeJpaMapper.INSTANCE);
     }
 
     @Override
-    public Optional<HomeModel> findById(Long aLong) {
-        return Optional.ofNullable(getRepository().findById(aLong).map(getMapper()::toModel).orElseThrow(() -> new RuntimeException("Not found")));
+    public Optional<HomeModel> findById(UUID uuid) {
+        return Optional.ofNullable(getRepository().findById(uuid).map(getMapper()::toModel).orElseThrow(() -> new RuntimeException("Not found")));
     }
 
     @Override
@@ -52,8 +53,8 @@ public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, Long, H
     }
 
     @Override
-    public void deleteById(Long aLong) {
-        getRepository().deleteById(aLong);
+    public void deleteById(UUID uuid) {
+        getRepository().deleteById(uuid);
     }
 
     @Override

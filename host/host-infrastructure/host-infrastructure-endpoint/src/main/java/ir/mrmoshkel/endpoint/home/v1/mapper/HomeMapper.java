@@ -19,11 +19,9 @@ public interface HomeMapper extends BaseMapper {
     HomeMapper INSTANCE = Mappers.getMapper(HomeMapper.class);
 
     @Mapping(source = "pricePerNight.price", target = "pricePerNight")
-    @Mapping(source = "address.street", target = "address")
     HomeDto toHomeDto(HomeModel homeModel);
 
     @Mapping(source = "pricePerNight", target = "pricePerNight.price")
-    @Mapping(source = "address", target = "address.street")
     HomeModel toHomeModel(HomeDto homeDto);
 
     @Mapping(source = "pricePerNight", target = "pricePerNight.price")
@@ -35,7 +33,7 @@ public interface HomeMapper extends BaseMapper {
     @Mapping(source = "uuid", target = "id")
     ReserveHomeCommand toReserveHomeCommand(UUID uuid);
 
-    @Mapping(source = "pricePerNight", target = "pricePerNight.price")
+    @Mapping(source = "homeDto.pricePerNight", target = "pricePerNight.price")
     @Mapping(source = "uuid", target = "id")
     UpdateHomeCommand toUpdateHomeCommand(HomeDto homeDto, UUID uuid);
 
