@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Getter
 @ToString
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Price extends BaseValueObject {
 

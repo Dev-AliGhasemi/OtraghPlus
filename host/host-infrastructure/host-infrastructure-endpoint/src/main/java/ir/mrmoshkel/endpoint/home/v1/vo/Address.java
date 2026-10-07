@@ -1,7 +1,17 @@
 package ir.mrmoshkel.endpoint.home.v1.vo;
 
+import ir.mrmoshkel.endpoint.validation.OnCreate;
+import ir.mrmoshkel.endpoint.validation.OnUpdate;
 import jakarta.validation.constraints.NotBlank;
 
-public record Address(@NotBlank String country, @NotBlank String city, @NotBlank String street,
-                      @NotBlank String postalCode, @NotBlank String houseNumber) {
+public record Address(    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+                          String country,
+                          @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+                          String city,
+                          @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+                          String street,
+                          @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+                          String postalCode,
+                          @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+                          String houseNumber) {
 }

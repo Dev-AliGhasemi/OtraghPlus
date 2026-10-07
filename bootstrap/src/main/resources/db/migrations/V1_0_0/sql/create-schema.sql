@@ -18,7 +18,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE homes (
-                       id BIGSERIAL PRIMARY KEY,
+                       id UUID PRIMARY KEY,
 
                        host_id BIGINT NOT NULL,
 

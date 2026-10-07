@@ -3,12 +3,14 @@ package ir.mrmoshkel.home.valueobject;
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 public class Address extends BaseValueObject {
     private String country;
     private String city;

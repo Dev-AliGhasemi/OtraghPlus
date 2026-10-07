@@ -1,6 +1,6 @@
 spring:
   mongodb:
-    uri: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@localhost:27017/${MONGODB_DATABASE}?authSource=${MONGODB_AUTH_DB:admin}
+    uri: mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@localhost:27017/${MONGODB_DATABASE}?authSource=${MONGODB_AUTH_DB:admin}&uuidRepresentation=standard
   jpa:
     show-sql: true
     hibernate:
@@ -14,5 +14,11 @@ spring:
 
 logging:
   level:
+    root: INFO
     org.springframework.kafka: ERROR
     org.apache.kafka.clients.consumer: ERROR
+    org.apache.kafka.clients.Metadata: ERROR
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.apache.kafka.common.metrics.Metrics: ERROR
+    org.apache.kafka.common.utils.AppInfoParser: ERROR
+debug: false

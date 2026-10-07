@@ -20,6 +20,7 @@ public class HomeEventHandler implements EventHandler {
 
     public void handle(HomeCreatedEvent homeCreatedEvent) {
         HomeModel homeModel = HomeModel.builder()
+                .id(homeCreatedEvent.getId())
                 .hostId(homeCreatedEvent.getHostId())
                 .pricePerNight(homeCreatedEvent.getPrice())
                 .address(homeCreatedEvent.getAddress())
