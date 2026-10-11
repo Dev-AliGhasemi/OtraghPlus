@@ -44,7 +44,9 @@ public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, UUID, H
 
     @Override
     public void save(HomeModel homeModel) {
-        getRepository().save(getMapper().toEntity(homeModel));
+        HomeEntity homeEntity = getMapper().toEntity(homeModel);
+        homeEntity.setNew(true);
+        getRepository().save(homeEntity);
     }
 
     @Override

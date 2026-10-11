@@ -1,12 +1,10 @@
 package ir.mrmoshkel.home.valueobject;
 
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)

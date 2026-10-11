@@ -7,6 +7,8 @@ import ir.mrmoshkel.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.home.command.ReserveHomeCommand;
 import ir.mrmoshkel.home.command.UpdateHomeCommand;
 import ir.mrmoshkel.home.model.HomeModel;
+import ir.mrmoshkel.home.query.FindAllHomeQuery;
+import ir.mrmoshkel.home.query.FindByIdHomeQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -36,5 +38,10 @@ public interface HomeMapper extends BaseMapper {
     @Mapping(source = "homeDto.pricePerNight", target = "pricePerNight.price")
     @Mapping(source = "uuid", target = "id")
     UpdateHomeCommand toUpdateHomeCommand(HomeDto homeDto, UUID uuid);
+
+    FindAllHomeQuery toFindAllHomeQuery(Long offset, Integer pageSize);
+
+    @Mapping(source = "uuid", target = "id")
+    FindByIdHomeQuery toFindByIdHomeQuery(UUID uuid);
 
 }

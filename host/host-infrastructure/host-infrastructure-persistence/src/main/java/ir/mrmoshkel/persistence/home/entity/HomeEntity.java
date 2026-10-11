@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Persistable;
 
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class HomeEntity extends BaseEntity<UUID> {
+public class HomeEntity extends BaseEntity<UUID> implements Persistable<UUID> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "host_id", nullable = false, updatable = false)
     private UserEntity host;
@@ -26,4 +27,18 @@ public class HomeEntity extends BaseEntity<UUID> {
     @Enumerated(EnumType.STRING)
     @Column(name = "reserve_state", nullable = false)
     private ReserveState reserveState = ReserveState.READY_TO_RESERVED;
+
+    @Transient
+    private boolean isNew = false;
+
+    @PostPersist
+    @PostLoad
+    void markNotNew() {
+        this.isNew = false;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
 }

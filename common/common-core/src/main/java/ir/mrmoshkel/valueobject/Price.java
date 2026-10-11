@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.Objects;
 
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)

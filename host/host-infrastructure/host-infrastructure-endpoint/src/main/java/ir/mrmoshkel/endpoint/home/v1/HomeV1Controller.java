@@ -46,14 +46,14 @@ public class HomeV1Controller {
 
     @GetMapping("/list")
     public ResponseEntity<Page<HomeDto>> findAll(@PageableDefault(size = 20) @SortDefault(sort = "hostId", direction = Sort.Direction.ASC) Pageable pageable) {
-        List<HomeDto> homeDtos = homeQueryHandler.handle(FindAllHomeQuery.builder().offset(pageable.getOffset()).pageSize(pageable.getPageSize()).build())
+        List<HomeDto> list = homeQueryHandler.handle(homeMapper.toFindAllHomeQuery(pageable.getOffset(), pageable.getPageSize()))
                 .stream().map(HomeMapper.INSTANCE::toHomeDto).toList();
-        return ResponseEntity.ok(new PageImpl<>(homeDtos, pageable, homeDtos.size()));
+        return ResponseEntity.ok(new PageImpl<>(list, pageable, list.size()));
     }
 
     @GetMapping("/{homeId}")
     public HomeDto findById(@PathVariable("homeId") UUID homeId) {
-        return homeMapper.toHomeDto(homeQueryHandler.handle(FindByIdHomeQuery.builder().id(homeId).build()));
+        return homeMapper.toHomeDto(homeQueryHandler.handle(homeMapper.toFindByIdHomeQuery(homeId)));
     }
 
     @PostMapping
