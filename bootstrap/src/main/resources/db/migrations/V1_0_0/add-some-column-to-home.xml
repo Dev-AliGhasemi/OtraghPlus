@@ -9,22 +9,26 @@
         <sql>
       <![CDATA[
             ALTER TABLE homes
-            ADD COLUMN city VARCHAR(255) NOT NULL,
-            ADD COLUMN country        VARCHAR(255) NOT NULL,
-            ADD COLUMN street        VARCHAR(255) NOT NULL,
-            ADD COLUMN postal_code        VARCHAR(255) NOT NULL,
-            ADD COLUMN houst_number        VARCHAR(255) NOT NULL,
+            ADD COLUMN IF NOT EXISTS city VARCHAR(255) NOT NULL,
+            ADD COLUMN IF NOT EXISTS country        VARCHAR(255) NOT NULL,
+            ADD COLUMN IF NOT EXISTS street        VARCHAR(255) NOT NULL,
+            ADD COLUMN IF NOT EXISTS postal_code        VARCHAR(255) NOT NULL,
+            ADD COLUMN IF NOT EXISTS house_number        VARCHAR(255) NOT NULL;
+            ALTER TABLE homes
+            DROP COLUMN IF EXISTS address
             ]]>
     </sql>
         <rollback>
             <sql>
                 <![CDATA[
                ALTER TABLE homes
-            DROP COLUMN city VARCHAR(255) NOT NULL,
-            DROP COLUMN country        VARCHAR(255) NOT NULL,
-            DROP COLUMN street        VARCHAR(255) NOT NULL,
-            DROP COLUMN postal_code        VARCHAR(255) NOT NULL,
-            DROP COLUMN houst_number        VARCHAR(255) NOT NULL,
+            DROP COLUMN IF EXISTS city VARCHAR(255) NOT NULL,
+            DROP COLUMN IF EXISTS country        VARCHAR(255) NOT NULL,
+            DROP COLUMN IF EXISTS street        VARCHAR(255) NOT NULL,
+            DROP COLUMN IF EXISTS postal_code        VARCHAR(255) NOT NULL,
+            DROP COLUMN IF EXISTS house_number        VARCHAR(255) NOT NULL;
+            ALTER TABLE homes
+            ADD COLUMN IF NOT EXISTS address VARCHAR(255) NOT NULL;
           ]]>
             </sql>
         </rollback>

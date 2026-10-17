@@ -2,11 +2,9 @@ package ir.mrmoshkel.bootstrap.config;
 
 import ir.mrmoshkel.contract.EventSource;
 import ir.mrmoshkel.contract.IdGenerator;
-import ir.mrmoshkel.eventproducer.KafkaEventProducer;
 import ir.mrmoshkel.eventsource.SimpleEventSource;
-import ir.mrmoshkel.eventstore.EventStoreRepository;
+import ir.mrmoshkel.eventstore.BaseEventStoreRepository;
 import ir.mrmoshkel.eventstore.SimpleEventStore;
-import ir.mrmoshkel.framework.EventHandler;
 import ir.mrmoshkel.framework.EventProducer;
 import ir.mrmoshkel.framework.EventStore;
 import ir.mrmoshkel.home.entity.Home;
@@ -48,8 +46,8 @@ public class HomeConfiguration {
     }
 
     @Bean
-    public EventStore eventStore(EventStoreRepository eventStoreRepository, EventProducer eventProducer) {
-        return new SimpleEventStore(eventStoreRepository, eventProducer);
+    public EventStore eventStore(BaseEventStoreRepository baseEventStoreRepository, EventProducer eventProducer) {
+        return new SimpleEventStore(baseEventStoreRepository, eventProducer);
     }
 
 

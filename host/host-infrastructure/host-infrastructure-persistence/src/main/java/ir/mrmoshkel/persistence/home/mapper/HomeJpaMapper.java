@@ -2,6 +2,8 @@ package ir.mrmoshkel.persistence.home.mapper;
 
 import ir.mrmoshkel.home.model.HomeModel;
 import ir.mrmoshkel.framework.BaseMapper;
+import ir.mrmoshkel.home.valueobject.Address;
+import ir.mrmoshkel.persistence.home.entity.AddressEmbeddable;
 import ir.mrmoshkel.persistence.home.entity.HomeEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,5 +20,8 @@ public interface HomeJpaMapper extends BaseMapper {
     @Mapping(source = "pricePerNight.price", target = "pricePerNight")
     @Mapping(source = "hostId", target = "host.id")
     HomeEntity toEntity(HomeModel homeModel);
+
+    AddressEmbeddable map(Address address);
+    Address map(AddressEmbeddable addressEmbeddable);
 
 }

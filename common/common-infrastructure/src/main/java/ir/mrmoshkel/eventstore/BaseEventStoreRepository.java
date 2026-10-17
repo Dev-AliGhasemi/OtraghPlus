@@ -2,12 +2,11 @@ package ir.mrmoshkel.eventstore;
 
 import ir.mrmoshkel.model.MongoEventModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
-import java.util.UUID;
 
-@Repository
-public interface EventStoreRepository extends MongoRepository<MongoEventModel, Long> {
+@NoRepositoryBean
+public interface BaseEventStoreRepository<ID> extends MongoRepository<MongoEventModel<ID>, String> {
     <ID> List<MongoEventModel<ID>> findByAggregateId(ID aggregateId);
 }
