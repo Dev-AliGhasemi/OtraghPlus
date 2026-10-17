@@ -1,6 +1,7 @@
 package ir.mrmoshkel.persistence.home.entity;
 
 import ir.mrmoshkel.home.enumeration.ReserveState;
+import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.persistence.framework.BaseEntity;
 import ir.mrmoshkel.persistence.user.entity.UserEntity;
 import jakarta.persistence.*;
@@ -22,8 +23,8 @@ public class HomeEntity extends BaseEntity<UUID> implements Persistable<UUID> {
     private UserEntity host;
     @Column(name = "price_per_night", nullable = false)
     private Long pricePerNight;
-    @Column(name = "address", nullable = false, length = 1000)
-    private String address;
+    @Embedded
+    private AddressEmbeddable address;
     @Enumerated(EnumType.STRING)
     @Column(name = "reserve_state", nullable = false)
     private ReserveState reserveState = ReserveState.READY_TO_RESERVED;

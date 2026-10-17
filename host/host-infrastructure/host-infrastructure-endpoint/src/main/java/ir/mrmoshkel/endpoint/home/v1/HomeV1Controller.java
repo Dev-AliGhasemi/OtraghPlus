@@ -68,7 +68,7 @@ public class HomeV1Controller {
 
     @PutMapping("/reserve/{homeId}")
     public void reserveHome(@PathVariable("homeId") UUID homeId) {
-        homeCommandHandler.handle(ReserveHomeCommand.builder().id(homeId).build());
+        homeCommandHandler.handle(homeMapper.toReserveHomeCommand(homeId));
     }
 
     @PutMapping("/{homeId}")

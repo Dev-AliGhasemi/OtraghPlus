@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/otragh_local_db
     username: postgres
-    password: 20011380
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
 
