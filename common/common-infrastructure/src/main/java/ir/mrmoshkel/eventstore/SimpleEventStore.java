@@ -23,8 +23,13 @@ public class SimpleEventStore implements EventStore {
     }
 
     @Override
+    public BaseEventStoreRepository getBaseEventStoreRepository() {
+        return this.baseEventStoreRepository;
+    }
+
+    @Override
     public <ID> void saveEvent(AggregateRoot<ID> aggregateRoot, List<BaseEvent> events, Long expectedVersion) {
-        List<MongoEventModel<ID>> mongoEventModels = baseEventStoreRepository.findByAggregateId(aggregateRoot.getId());
+        List<MongoEventModel<ID>> mongoEventModels = getBaseEventStoreRepository().findByAggregateId(aggregateRoot.getId());
         if (Objects.isNull(mongoEventModels) || (!mongoEventModels.isEmpty() && mongoEventModels.get(mongoEventModels.size() - 1).getVersion() != expectedVersion))
             throw new RuntimeException("Concurrency error");
         Long version = expectedVersion == null ? 0 : expectedVersion;
@@ -39,7 +44,7 @@ public class SimpleEventStore implements EventStore {
                     .eventType(baseEvent.getClass().getTypeName())
                     .eventData(baseEvent)
                     .build();
-            MongoEventModel saved = baseEventStoreRepository.save(mongoEventModel);
+            MongoEventModel saved = (MongoEventModel) getBaseEventStoreRepository().save(mongoEventModel);
             if (Objects.nonNull(saved.getId())) {
                 try {
                     eventProducer.produce(baseEvent.getClass().getSimpleName(), baseEvent);
@@ -54,7 +59,7 @@ public class SimpleEventStore implements EventStore {
 
     @Override
     public <ID> List<BaseEvent> getEvents(ID aggregateId) {
-        List<MongoEventModel<ID>> mongoEventModels = baseEventStoreRepository.findByAggregateId(aggregateId);
+        List<MongoEventModel<ID>> mongoEventModels = getBaseEventStoreRepository().findByAggregateId(aggregateId);
         if (Objects.nonNull(mongoEventModels) || mongoEventModels.isEmpty())
             throw new RuntimeException("No events exists");
         return mongoEventModels.stream().map(MongoEventModel::getEventData).toList();
@@ -62,7 +67,7 @@ public class SimpleEventStore implements EventStore {
 
     @Override
     public <ID> List<ID> getAggregateIds() {
-        List<MongoEventModel> mongoEventModels = baseEventStoreRepository.findAll();
+        List<MongoEventModel> mongoEventModels = getBaseEventStoreRepository().findAll();
         if (mongoEventModels.isEmpty())
             throw new RuntimeException("No events exists");
         return (List<ID>) mongoEventModels.stream().map(BaseEventModel::getAggregateId).distinct().toList();

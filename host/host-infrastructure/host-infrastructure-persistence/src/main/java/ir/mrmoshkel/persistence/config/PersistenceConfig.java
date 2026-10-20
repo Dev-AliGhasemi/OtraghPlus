@@ -5,10 +5,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
 @ComponentScan("ir.mrmoshkel.persistence")
 @EnableJpaRepositories(basePackages = "ir.mrmoshkel.persistence")
+@EnableMongoRepositories(basePackages = "ir.mrmoshkel.persistence")
 @EnableJpaAuditing
 @EntityScan(
         basePackages = "ir.mrmoshkel.persistence"

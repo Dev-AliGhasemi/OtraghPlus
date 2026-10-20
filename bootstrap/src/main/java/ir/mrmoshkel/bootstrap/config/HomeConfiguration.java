@@ -12,6 +12,7 @@ import ir.mrmoshkel.home.handler.command.home.command.handler.HomeCommandHandler
 import ir.mrmoshkel.home.handler.event.HomeEventHandler;
 import ir.mrmoshkel.home.handler.query.HomeQueryHandler;
 import ir.mrmoshkel.idgenerator.UUIDGenerator;
+import ir.mrmoshkel.persistence.home.repository.HomeEventStoreRepository;
 import ir.mrmoshkel.persistence.home.repository.HomeRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,8 +47,8 @@ public class HomeConfiguration {
     }
 
     @Bean
-    public EventStore eventStore(BaseEventStoreRepository baseEventStoreRepository, EventProducer eventProducer) {
-        return new SimpleEventStore(baseEventStoreRepository, eventProducer);
+    public EventStore eventStore(HomeEventStoreRepository homeEventStoreRepository, EventProducer eventProducer) {
+        return new SimpleEventStore(homeEventStoreRepository, eventProducer);
     }
 
 
