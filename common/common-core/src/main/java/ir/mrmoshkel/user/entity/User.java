@@ -63,4 +63,9 @@ public class User extends AggregateRoot<UUID> {
         this.email = updateUserCommand.getEmail();
         this.phoneNumber = updateUserCommand.getPhoneNumber();
     }
+
+    @Override
+    public String getName() {
+        return "USER";
+    }
 }

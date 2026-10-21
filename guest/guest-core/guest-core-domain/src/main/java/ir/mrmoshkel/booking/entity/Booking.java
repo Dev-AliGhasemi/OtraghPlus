@@ -7,11 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Booking extends AggregateRoot<Long> {
     private Long guestId;
     private Long homeId;
@@ -20,4 +19,8 @@ public class Booking extends AggregateRoot<Long> {
     private BookingStatus bookingStatus;
     private DateRange duration;
 
+    @Override
+    public String getName() {
+        return "BOOKING";
+    }
 }

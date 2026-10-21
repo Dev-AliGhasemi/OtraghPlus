@@ -8,8 +8,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public abstract class BaseEntity<ID> {
     @EqualsAndHashCode.Include
+    @Setter
     protected ID id;
     @EqualsAndHashCode.Include
+    @Setter
     protected String name;
 
     protected AuditDetail auditDetail;
@@ -30,4 +32,6 @@ public abstract class BaseEntity<ID> {
     public String getCode(){
         return "%s:%s".formatted(name, id);
     }
+
+    public abstract String getName();
 }

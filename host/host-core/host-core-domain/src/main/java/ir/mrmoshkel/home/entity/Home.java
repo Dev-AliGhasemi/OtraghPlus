@@ -1,6 +1,7 @@
 package ir.mrmoshkel.home.entity;
 
 import ir.mrmoshkel.framework.entity.AggregateRoot;
+import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.home.command.UpdateHomeCommand;
@@ -11,7 +12,9 @@ import ir.mrmoshkel.home.event.HomeReservedEvent;
 import ir.mrmoshkel.home.event.HomeUpdatedEvent;
 import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.valueobject.Price;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
@@ -25,8 +28,10 @@ public class Home extends AggregateRoot<UUID> {
     private Address address;
     private ReserveState reserveState;
 
-    private Home(UUID id ,String name, Long hostId, Price pricePerNight, Address address) {
-        super(id, name);
+    private static final String NAME = "HOME";
+
+    private Home(UUID id , Long hostId, Price pricePerNight, Address address) {
+        super(id, NAME);
         raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).price(pricePerNight).address(address).build());
     }
 
@@ -39,7 +44,7 @@ public class Home extends AggregateRoot<UUID> {
             throw new IllegalArgumentException("Address can't be null");
         else if (Objects.isNull(createHomeCommand.getHostId()))
             throw new IllegalArgumentException("HostId can't be null");
-        return new Home(createHomeCommand.getId(), Home.class.getName(), createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
+        return new Home(createHomeCommand.getId(), createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
     }
 
     public void reserveHome() {
@@ -76,5 +81,10 @@ public class Home extends AggregateRoot<UUID> {
     public void delete(DeleteHomeCommand deleteHomeCommand) {
         //TODO check validation
         raiseEvent(HomeDeletedEvent.builder().aggregateId(deleteHomeCommand.getId()).build());
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 }

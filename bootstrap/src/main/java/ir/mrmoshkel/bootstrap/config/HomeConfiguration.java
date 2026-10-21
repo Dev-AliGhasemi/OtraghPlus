@@ -37,7 +37,7 @@ public class HomeConfiguration {
 
     @Bean
     public EventSource<Home,UUID> homeEventSource(EventStore<UUID> eventStore, EventProducer eventProducer) {
-        return new SimpleEventSource<Home, UUID>(eventStore, eventProducer);
+        return new SimpleEventSource<Home, UUID>(eventStore, eventProducer, () -> Home.builder().build());
     }
 
     @Bean

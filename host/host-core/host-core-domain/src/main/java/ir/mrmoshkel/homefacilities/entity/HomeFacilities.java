@@ -16,4 +16,9 @@ public class HomeFacilities extends BaseEntity<Long> {
     private Home home;
     private Facilities facilities;
     private Price price;
+
+    @Override
+    public String getName() {
+        return "HOME";
+    }
 }
