@@ -20,7 +20,7 @@ public class HomeEventHandler implements EventHandler {
 
     public void handle(HomeCreatedEvent homeCreatedEvent) {
         HomeModel homeModel = HomeModel.builder()
-                .id(homeCreatedEvent.getId())
+                .id(homeCreatedEvent.getAggregateId())
                 .hostId(homeCreatedEvent.getHostId())
                 .pricePerNight(homeCreatedEvent.getPrice())
                 .address(homeCreatedEvent.getAddress())
@@ -29,25 +29,25 @@ public class HomeEventHandler implements EventHandler {
     }
 
     public void handle(HomeUpdatedEvent homeUpdatedEvent) {
-        homeRepository.findById(homeUpdatedEvent.getId()).ifPresentOrElse(homeModel -> {
+        homeRepository.findById(homeUpdatedEvent.getAggregateId()).ifPresentOrElse(homeModel -> {
             homeModel.setAddress(homeUpdatedEvent.getAddress());
             homeModel.setPricePerNight(homeUpdatedEvent.getPrice());
             homeRepository.save(homeModel);
         }, () -> {
-            throw new RuntimeException("No entity found with id " + homeUpdatedEvent.getId());
+            throw new RuntimeException("No entity found with id " + homeUpdatedEvent.getAggregateId());
         });
     }
 
     public void handle(HomeDeletedEvent homeDeletedEvent) {
-        homeRepository.findById(homeDeletedEvent.getId()).ifPresentOrElse(homeModel -> homeRepository.deleteById(homeModel.getId()),
+        homeRepository.findById(homeDeletedEvent.getAggregateId()).ifPresentOrElse(homeModel -> homeRepository.deleteById(homeModel.getId()),
                 () -> {
-                    throw new RuntimeException("No entity found with id " + homeDeletedEvent.getId());
+                    throw new RuntimeException("No entity found with id " + homeDeletedEvent.getAggregateId());
                 });
     }
 
     public void handle(HomeReservedEvent homeReservedEvent) {
-        homeRepository.findById(homeReservedEvent.getId()).ifPresentOrElse(homeRepository::reserve, () -> {
-            throw new RuntimeException("No entity found with id " + homeReservedEvent.getId());
+        homeRepository.findById(homeReservedEvent.getAggregateId()).ifPresentOrElse(homeRepository::reserve, () -> {
+            throw new RuntimeException("No entity found with id " + homeReservedEvent.getAggregateId());
         });
     }
 }

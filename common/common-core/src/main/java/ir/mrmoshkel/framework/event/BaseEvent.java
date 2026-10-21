@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public abstract class BaseEvent<ID> {
+public abstract class BaseEvent<AGG_ID> {
     private long version;
-    private ID id;
+    private AGG_ID aggregateId;
 }

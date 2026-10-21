@@ -21,5 +21,5 @@ public class BaseEventModel<AGG_ID> {
     protected AGG_ID aggregateId;
     protected String eventType;
     protected long version;
-    protected BaseEvent eventData;
+    protected BaseEvent<AGG_ID> eventData;
 }

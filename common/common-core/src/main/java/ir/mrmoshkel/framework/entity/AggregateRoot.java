@@ -15,7 +15,7 @@ import java.util.List;
 @SuperBuilder
 public class AggregateRoot<ID> extends BaseEntity<ID> {
 
-    private List<BaseEvent> events = new ArrayList<>();
+    private List<BaseEvent<ID>> events = new ArrayList<>();
     private static final boolean NEW_EVENT = true;
     @Setter
     private Long version;
@@ -29,15 +29,15 @@ public class AggregateRoot<ID> extends BaseEntity<ID> {
         events.clear();
     }
 
-    protected void raiseEvent(BaseEvent baseEvent) {
+    protected void raiseEvent(BaseEvent<ID> baseEvent) {
         applyChange(baseEvent, NEW_EVENT);
     }
 
-    public void replayEvents(List<BaseEvent> events) {
+    public void replayEvents(List<BaseEvent<ID>> events) {
         events.forEach(baseEvent -> applyChange(baseEvent, !NEW_EVENT));
     }
 
-    private void applyChange(BaseEvent baseEvent, boolean isNewEvent) {
+    private void applyChange(BaseEvent<ID> baseEvent, boolean isNewEvent) {
         try {
             Method apply = getClass().getDeclaredMethod("apply", baseEvent.getClass());
             apply.setAccessible(true);

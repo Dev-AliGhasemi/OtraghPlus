@@ -27,7 +27,7 @@ public class Home extends AggregateRoot<UUID> {
 
     private Home(UUID id ,String name, Long hostId, Price pricePerNight, Address address) {
         super(id, name);
-        raiseEvent(HomeCreatedEvent.builder().id(id).hostId(hostId).price(pricePerNight).address(address).build());
+        raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).price(pricePerNight).address(address).build());
     }
 
     public static Home createHome(CreateHomeCommand createHomeCommand) {
@@ -47,7 +47,7 @@ public class Home extends AggregateRoot<UUID> {
     }
 
     private void apply(HomeCreatedEvent homeCreatedEvent) {
-        this.id = homeCreatedEvent.getId();
+        this.id = homeCreatedEvent.getAggregateId();
         this.hostId = homeCreatedEvent.getHostId();
         this.pricePerNight = homeCreatedEvent.getPrice();
         this.address = homeCreatedEvent.getAddress();
@@ -70,11 +70,11 @@ public class Home extends AggregateRoot<UUID> {
 
     public void update(UpdateHomeCommand updateHomeCommand) {
         //TODO check validation
-        raiseEvent(HomeUpdatedEvent.builder().id(updateHomeCommand.getId()).price(updateHomeCommand.getPricePerNight()).address(updateHomeCommand.getAddress()).build());
+        raiseEvent(HomeUpdatedEvent.builder().aggregateId(updateHomeCommand.getId()).price(updateHomeCommand.getPricePerNight()).address(updateHomeCommand.getAddress()).build());
     }
 
     public void delete(DeleteHomeCommand deleteHomeCommand) {
         //TODO check validation
-        raiseEvent(HomeDeletedEvent.builder().id(deleteHomeCommand.getId()).build());
+        raiseEvent(HomeDeletedEvent.builder().aggregateId(deleteHomeCommand.getId()).build());
     }
 }

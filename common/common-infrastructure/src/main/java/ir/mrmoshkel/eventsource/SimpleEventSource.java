@@ -13,10 +13,10 @@ import java.util.concurrent.ExecutionException;
 
 public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements EventSource<T, ID> {
 
-    private final EventStore eventStore;
+    private final EventStore<ID> eventStore;
     private final EventProducer eventProducer;
 
-    public SimpleEventSource(EventStore eventStore, EventProducer eventProducer) {
+    public SimpleEventSource(EventStore<ID> eventStore, EventProducer eventProducer) {
         this.eventStore = eventStore;
         this.eventProducer = eventProducer;
     }
@@ -24,7 +24,7 @@ public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements Event
     @Override
     public T getById(ID id) {
         T aggregateRoot = (T) AggregateRoot.builder().build();
-        List<BaseEvent> events = eventStore.getEvents(id);
+        List<BaseEvent<ID>> events = eventStore.getEvents(id);
         if (Objects.nonNull(events) && !events.isEmpty()) {
             aggregateRoot.replayEvents(events);
             Optional<Long> latestVersion = events.stream().map(BaseEvent::getVersion).max(Long::compareTo);
@@ -45,8 +45,8 @@ public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements Event
         for (ID aggregateId : aggregateIds) {
             T accountAggregate = getById(aggregateId);
             if (accountAggregate == null) continue;
-            List<BaseEvent> events = eventStore.getEvents(aggregateId);
-            for (BaseEvent event : events) {
+            List<BaseEvent<ID>> events = eventStore.getEvents(aggregateId);
+            for (BaseEvent<ID> event : events) {
                 try {
                     eventProducer.produce(event.getClass().getSimpleName(), event);
                 } catch (ExecutionException e) {
