@@ -72,7 +72,7 @@ public class HomeV1Controller {
     }
 
     @PutMapping("/{homeId}")
-    public void updateHome(@PathVariable UUID homeId, @Validated(OnUpdate.class) @RequestBody HomeDto homeDto) {
+    public void updateHome(@PathVariable("homeId") UUID homeId, @Validated(OnUpdate.class) @RequestBody HomeDto homeDto) {
         homeCommandHandler.handle(homeMapper.toUpdateHomeCommand(homeDto, homeId));
     }
 }

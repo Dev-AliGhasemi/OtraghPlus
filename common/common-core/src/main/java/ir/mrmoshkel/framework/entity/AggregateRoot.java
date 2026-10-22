@@ -23,6 +23,7 @@ public abstract class AggregateRoot<ID> extends BaseEntity<ID> {
 
     public AggregateRoot(ID id, String name) {
         super(id, name);
+        events = new ArrayList<>();
     }
 
 

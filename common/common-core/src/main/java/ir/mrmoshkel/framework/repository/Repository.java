@@ -10,6 +10,7 @@ public interface Repository<T extends DataModel<ID> ,ID> {
     List<T> findAll();
     List<T> findAll(Long offset, Integer pageSize);
     void save(T t);
+    void save(T t, boolean isNew);
     void delete(T t);
     void deleteById(ID id);
     void reserve(T t);

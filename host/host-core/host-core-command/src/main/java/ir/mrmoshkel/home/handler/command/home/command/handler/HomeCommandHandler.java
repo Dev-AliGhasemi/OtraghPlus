@@ -26,7 +26,7 @@ public class HomeCommandHandler implements CommandHandler {
 
     public void handle(ReserveHomeCommand reserveHomeCommand) {
         Home home = eventSource.getById(reserveHomeCommand.getId());
-        home.reserveHome();
+        home.reserveHome(reserveHomeCommand);
         eventSource.save(home);
     }
 

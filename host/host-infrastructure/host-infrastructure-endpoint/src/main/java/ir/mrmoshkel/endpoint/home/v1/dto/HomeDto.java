@@ -15,7 +15,7 @@ import org.springframework.format.annotation.NumberFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeDto {
-    @NotNull(groups = {OnCreate.class, OnUpdate.class}, message = "otragh.endpoint.validation.input_data_can_not_be_null")
+    @NotNull(groups = {OnCreate.class}, message = "otragh.endpoint.validation.input_data_can_not_be_null")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     private Long hostId;
     @NotNull(groups = {OnCreate.class, OnUpdate.class}, message = "otragh.endpoint.validation.input_data_can_not_be_null")
@@ -24,6 +24,5 @@ public class HomeDto {
     @Valid
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
     private Address address;
-    @NotNull(groups = {OnUpdate.class}, message = "otragh.endpoint.validation.input_data_can_not_be_null")
     private String reserveState;
 }

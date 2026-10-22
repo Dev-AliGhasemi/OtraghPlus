@@ -4,6 +4,7 @@ import ir.mrmoshkel.framework.entity.AggregateRoot;
 import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.command.DeleteHomeCommand;
+import ir.mrmoshkel.home.command.ReserveHomeCommand;
 import ir.mrmoshkel.home.command.UpdateHomeCommand;
 import ir.mrmoshkel.home.enumeration.ReserveState;
 import ir.mrmoshkel.home.event.HomeCreatedEvent;
@@ -47,8 +48,8 @@ public class Home extends AggregateRoot<UUID> {
         return new Home(createHomeCommand.getId(), createHomeCommand.getHostId(), createHomeCommand.getPricePerNight(), createHomeCommand.getAddress());
     }
 
-    public void reserveHome() {
-        raiseEvent(HomeReservedEvent.builder().build());
+    public void reserveHome(ReserveHomeCommand reserveHomeCommand) {
+        raiseEvent(HomeReservedEvent.builder().aggregateId(reserveHomeCommand.getId()).build());
     }
 
     private void apply(HomeCreatedEvent homeCreatedEvent) {

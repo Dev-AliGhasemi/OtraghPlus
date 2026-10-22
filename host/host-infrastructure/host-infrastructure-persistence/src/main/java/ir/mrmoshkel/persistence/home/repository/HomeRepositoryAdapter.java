@@ -1,5 +1,6 @@
 package ir.mrmoshkel.persistence.home.repository;
 
+import ir.mrmoshkel.home.enumeration.ReserveState;
 import ir.mrmoshkel.home.model.HomeModel;
 import ir.mrmoshkel.home.repository.HomeRepository;
 import ir.mrmoshkel.persistence.framework.RepositoryAdapter;
@@ -43,10 +44,15 @@ public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, UUID, H
     }
 
     @Override
-    public void save(HomeModel homeModel) {
+    public void save(HomeModel homeModel, boolean isNew) {
         HomeEntity homeEntity = getMapper().toEntity(homeModel);
-        homeEntity.setNew(true);
+        homeEntity.setNew(isNew);
         getRepository().save(homeEntity);
+    }
+
+    @Override
+    public void save(HomeModel homeModel) {
+        save(homeModel, true);
     }
 
     @Override
@@ -61,6 +67,6 @@ public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, UUID, H
 
     @Override
     public void reserve(HomeModel homeModel) {
-        ((HomeJpaRepository) getRepository()).reserve(homeModel.getId(), homeModel.getReserveState());
+        ((HomeJpaRepository) getRepository()).reserve(homeModel.getId(), ReserveState.RESERVED);
     }
 }

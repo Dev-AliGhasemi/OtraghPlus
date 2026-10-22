@@ -32,7 +32,7 @@ public class HomeEventHandler implements EventHandler {
         homeRepository.findById(homeUpdatedEvent.getAggregateId()).ifPresentOrElse(homeModel -> {
             homeModel.setAddress(homeUpdatedEvent.getAddress());
             homeModel.setPricePerNight(homeUpdatedEvent.getPrice());
-            homeRepository.save(homeModel);
+            homeRepository.save(homeModel,false);
         }, () -> {
             throw new RuntimeException("No entity found with id " + homeUpdatedEvent.getAggregateId());
         });

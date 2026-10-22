@@ -16,6 +16,7 @@ import java.util.UUID;
 @Repository
 public interface HomeJpaRepository extends JpaRepository<HomeEntity, UUID> {
 
+    @Transactional
     @Query("UPDATE HomeEntity home SET home.reserveState = :reserveState WHERE home.id = :id")
     @Modifying
     void reserve(@Param("id") UUID id, @Param("reserveState") ReserveState reserveState);

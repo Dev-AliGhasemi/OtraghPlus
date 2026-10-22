@@ -1,11 +1,11 @@
 package ir.mrmoshkel.home.event;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
-import ir.mrmoshkel.home.enumeration.ReserveState;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Getter
+@NoArgsConstructor
 @SuperBuilder
 public class HomeReservedEvent extends HomeEvent {
 }
