@@ -1,18 +1,17 @@
 package ir.mrmoshkel.valueobject;
 
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
+import ir.mrmoshkel.framework.event.data.PriceData;
 import lombok.*;
 
 import java.util.Objects;
 
 @Getter
-@Setter
 @ToString
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Price extends BaseValueObject {
+public class Price extends BaseValueObject<PriceData> {
 
-    private Long price;
+    private final Long price;
 
     public Price(Long price) {
         this.price = price;
@@ -31,9 +30,14 @@ public class Price extends BaseValueObject {
 
     @Override
     public void validate() {
-        if (price == null)
+        if (Objects.isNull(price))
             throw new IllegalArgumentException("Price is null");
         else if (price < zero)
             throw new IllegalArgumentException("Price must be greater than zero");
+    }
+
+    @Override
+    public PriceData toData() {
+        return new PriceData(price);
     }
 }

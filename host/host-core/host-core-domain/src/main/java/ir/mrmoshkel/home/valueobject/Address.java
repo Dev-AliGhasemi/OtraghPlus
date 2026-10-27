@@ -1,20 +1,18 @@
 package ir.mrmoshkel.home.valueobject;
 
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
+import ir.mrmoshkel.home.event.data.AddressData;
 import lombok.*;
 
-
-@Setter
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-public class Address extends BaseValueObject {
-    private String country;
-    private String city;
-    private String street;
-    private String postalCode;
-    private String houseNumber;
+public class Address extends BaseValueObject<AddressData> {
+    private final String country;
+    private final String city;
+    private final String street;
+    private final String postalCode;
+    private final String houseNumber;
 
     public Address(String country, String city, String street, String postalCode, String houseNumber) {
         this.country = country;
@@ -37,5 +35,10 @@ public class Address extends BaseValueObject {
             throw new IllegalArgumentException("postal code is null");
         else if (houseNumber == null)
             throw new IllegalArgumentException("house number is null");
+    }
+
+    @Override
+    public AddressData toData() {
+        return new AddressData(country, city, street, postalCode, houseNumber);
     }
 }

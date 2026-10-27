@@ -1,7 +1,6 @@
 package ir.mrmoshkel.home.entity;
 
 import ir.mrmoshkel.framework.entity.AggregateRoot;
-import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.home.command.ReserveHomeCommand;
@@ -13,9 +12,7 @@ import ir.mrmoshkel.home.event.HomeReservedEvent;
 import ir.mrmoshkel.home.event.HomeUpdatedEvent;
 import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.valueobject.Price;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
@@ -33,7 +30,7 @@ public class Home extends AggregateRoot<UUID> {
 
     private Home(UUID id , Long hostId, Price pricePerNight, Address address) {
         super(id, NAME);
-        raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).price(pricePerNight).address(address).build());
+        raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).priceData(pricePerNight.toData()).addressData(address.toData()).build());
     }
 
     public static Home createHome(CreateHomeCommand createHomeCommand) {
@@ -55,8 +52,8 @@ public class Home extends AggregateRoot<UUID> {
     private void apply(HomeCreatedEvent homeCreatedEvent) {
         this.id = homeCreatedEvent.getAggregateId();
         this.hostId = homeCreatedEvent.getHostId();
-        this.pricePerNight = homeCreatedEvent.getPrice();
-        this.address = homeCreatedEvent.getAddress();
+        this.pricePerNight = homeCreatedEvent.getPriceData().toValueObject();
+        this.address = homeCreatedEvent.getAddressData().toValueObject();
         this.reserveState = ReserveState.READY_TO_RESERVED;
     }
 
@@ -65,8 +62,8 @@ public class Home extends AggregateRoot<UUID> {
     }
 
     private void apply(HomeUpdatedEvent homeUpdatedEvent) {
-        this.pricePerNight = homeUpdatedEvent.getPrice();
-        this.address = homeUpdatedEvent.getAddress();
+        this.pricePerNight = homeUpdatedEvent.getPrice().toValueObject();
+        this.address = homeUpdatedEvent.getAddress().toValueObject();
     }
 
     private void apply(HomeDeletedEvent homeDeletedEvent) {
@@ -76,7 +73,7 @@ public class Home extends AggregateRoot<UUID> {
 
     public void update(UpdateHomeCommand updateHomeCommand) {
         //TODO check validation
-        raiseEvent(HomeUpdatedEvent.builder().aggregateId(updateHomeCommand.getId()).price(updateHomeCommand.getPricePerNight()).address(updateHomeCommand.getAddress()).build());
+        raiseEvent(HomeUpdatedEvent.builder().aggregateId(updateHomeCommand.getId()).price(updateHomeCommand.getPricePerNight().toData()).address(updateHomeCommand.getAddress().toData()).build());
     }
 
     public void delete(DeleteHomeCommand deleteHomeCommand) {

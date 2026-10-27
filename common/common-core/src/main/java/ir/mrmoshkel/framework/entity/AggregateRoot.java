@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -18,10 +19,9 @@ public abstract class AggregateRoot<ID> extends BaseEntity<ID> {
     @Builder.Default
     private List<BaseEvent<ID>> events = new ArrayList<>();
     private static final boolean NEW_EVENT = true;
-    @Setter
     private Long version;
 
-    public AggregateRoot(ID id, String name) {
+    protected AggregateRoot(ID id, String name) {
         super(id, name);
         events = new ArrayList<>();
     }
@@ -33,6 +33,14 @@ public abstract class AggregateRoot<ID> extends BaseEntity<ID> {
 
     protected void raiseEvent(BaseEvent<ID> baseEvent) {
         applyChange(baseEvent, NEW_EVENT);
+    }
+
+    public void postInitialize(ID id, String name, Long version) {
+        this.id = id;
+        this.name = name;
+        this.version = version;
+        if (Objects.isNull(version))
+            throw new IllegalArgumentException("version is null");
     }
 
     public void replayEvents(List<BaseEvent<ID>> events) {

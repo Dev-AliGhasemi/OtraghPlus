@@ -22,8 +22,8 @@ public class HomeEventHandler implements EventHandler {
         HomeModel homeModel = HomeModel.builder()
                 .id(homeCreatedEvent.getAggregateId())
                 .hostId(homeCreatedEvent.getHostId())
-                .pricePerNight(homeCreatedEvent.getPrice())
-                .address(homeCreatedEvent.getAddress())
+                .pricePerNight(homeCreatedEvent.getPriceData())
+                .address(homeCreatedEvent.getAddressData())
                 .build();
         homeRepository.save(homeModel);
     }

@@ -8,18 +8,16 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public abstract class BaseEntity<ID> {
     @EqualsAndHashCode.Include
-    @Setter
     protected ID id;
     @EqualsAndHashCode.Include
-    @Setter
     protected String name;
 
     protected AuditDetail auditDetail;
 
-    public BaseEntity(ID id, String name) {
+    protected BaseEntity(ID id, String name) {
         this.name = name;
         this.id = id;
-
+        validate();
     }
 
     public void validate() {

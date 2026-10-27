@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements EventSource<T, ID> {
@@ -32,9 +31,7 @@ public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements Event
         if (Objects.nonNull(events) && !events.isEmpty()) {
             aggregateRoot.replayEvents(events);
             Optional<Long> latestVersion = events.stream().map(BaseEvent::getVersion).max(Long::compareTo);
-            aggregateRoot.setVersion(latestVersion.get());
-            aggregateRoot.setName(aggregateRoot.getName());
-            aggregateRoot.setId(id);
+            aggregateRoot.postInitialize(id, aggregateRoot.getName(), latestVersion.orElse(null));
         }
         return aggregateRoot;
     }
@@ -55,9 +52,7 @@ public class SimpleEventSource<T extends AggregateRoot<ID>, ID> implements Event
             for (BaseEvent<ID> event : events) {
                 try {
                     eventProducer.produce(event.getClass().getSimpleName(), event);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
+                } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
