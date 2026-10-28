@@ -1,13 +1,15 @@
 package ir.mrmoshkel.home.valueobject;
 
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
-import ir.mrmoshkel.home.event.data.AddressData;
+import ir.mrmoshkel.home.event.data.AddressEventData;
 import lombok.*;
+import org.jmolecules.ddd.annotation.ValueObject;
 
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class Address extends BaseValueObject<AddressData> {
+@ValueObject
+public class Address extends BaseValueObject<AddressEventData> {
     private final String country;
     private final String city;
     private final String street;
@@ -38,7 +40,7 @@ public class Address extends BaseValueObject<AddressData> {
     }
 
     @Override
-    public AddressData toData() {
-        return new AddressData(country, city, street, postalCode, houseNumber);
+    public AddressEventData toData() {
+        return new AddressEventData(country, city, street, postalCode, houseNumber);
     }
 }

@@ -14,16 +14,15 @@ import java.util.Objects;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-public abstract class AggregateRoot<ID> extends BaseEntity<ID> {
+public abstract class BaseAggregateRoot<ID> extends BaseEntity<ID> {
 
     @Builder.Default
     private List<BaseEvent<ID>> events = new ArrayList<>();
     private static final boolean NEW_EVENT = true;
     private Long version;
 
-    protected AggregateRoot(ID id, String name) {
+    protected BaseAggregateRoot(ID id, String name) {
         super(id, name);
-        events = new ArrayList<>();
     }
 
 

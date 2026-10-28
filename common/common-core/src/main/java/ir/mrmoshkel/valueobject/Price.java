@@ -1,7 +1,7 @@
 package ir.mrmoshkel.valueobject;
 
 import ir.mrmoshkel.framework.valueobject.BaseValueObject;
-import ir.mrmoshkel.framework.event.data.PriceData;
+import ir.mrmoshkel.framework.event.data.PriceEventData;
 import lombok.*;
 
 import java.util.Objects;
@@ -9,7 +9,7 @@ import java.util.Objects;
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class Price extends BaseValueObject<PriceData> {
+public class Price extends BaseValueObject<PriceEventData> {
 
     private final Long price;
 
@@ -37,7 +37,7 @@ public class Price extends BaseValueObject<PriceData> {
     }
 
     @Override
-    public PriceData toData() {
-        return new PriceData(price);
+    public PriceEventData toData() {
+        return new PriceEventData(price);
     }
 }

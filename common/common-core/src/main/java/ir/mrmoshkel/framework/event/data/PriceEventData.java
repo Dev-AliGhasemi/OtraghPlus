@@ -1,13 +1,14 @@
 package ir.mrmoshkel.framework.event.data;
 
 import ir.mrmoshkel.valueobject.Price;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 //These vo data are for serialization and deserialization problem of value objects
-@Getter
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @AllArgsConstructor
-public class PriceData extends BaseEventData<Price> {
+@Data
+public class PriceEventData extends BaseEventData<Price> {
     private Long price;
 
     @Override

@@ -2,6 +2,7 @@ package ir.mrmoshkel.eventproducer;
 
 import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.framework.EventProducer;
+import org.jmolecules.event.annotation.DomainEventPublisher;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,9 @@ public class KafkaEventProducer implements EventProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    @DomainEventPublisher
     @Override
-    public void produce(String topic, BaseEvent baseEvent) throws ExecutionException, InterruptedException {
-        SendResult<String, Object> sendResult = kafkaTemplate.send(topic, "test", baseEvent).get();
-        System.out.println(sendResult.getProducerRecord().headers());
+    public <T> void produce(String topic, BaseEvent<T> baseEvent) throws ExecutionException, InterruptedException {
+        kafkaTemplate.send(topic, "test", baseEvent).get();
     }
 }

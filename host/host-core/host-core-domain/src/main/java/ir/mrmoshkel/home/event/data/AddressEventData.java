@@ -2,12 +2,13 @@ package ir.mrmoshkel.home.event.data;
 
 import ir.mrmoshkel.framework.event.data.BaseEventData;
 import ir.mrmoshkel.home.valueobject.Address;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
-@Getter
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-public class AddressData extends BaseEventData<Address> {
+@NoArgsConstructor
+@Data
+public class AddressEventData extends BaseEventData<Address> {
     private String country;
     private String city;
     private String street;

@@ -1,6 +1,6 @@
 package ir.mrmoshkel.user.entity;
 
-import ir.mrmoshkel.framework.entity.AggregateRoot;
+import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.user.command.CreateUserCommand;
 import ir.mrmoshkel.user.command.UpdateUserCommand;
 import ir.mrmoshkel.user.event.UserCreatedEvent;
@@ -8,18 +8,14 @@ import ir.mrmoshkel.user.event.UserUpdatedEvent;
 import ir.mrmoshkel.user.valueobject.Email;
 import ir.mrmoshkel.user.valueobject.Password;
 import ir.mrmoshkel.user.valueobject.PhoneNumber;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @SuperBuilder
-public class User extends AggregateRoot<UUID> {
+public class User extends BaseAggregateRoot<UUID> {
     private String firstName;
     private String lastName;
     private String username;

@@ -1,6 +1,6 @@
 package ir.mrmoshkel.home.entity;
 
-import ir.mrmoshkel.framework.entity.AggregateRoot;
+import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.home.command.CreateHomeCommand;
 import ir.mrmoshkel.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.home.command.ReserveHomeCommand;
@@ -14,13 +14,15 @@ import ir.mrmoshkel.home.valueobject.Address;
 import ir.mrmoshkel.valueobject.Price;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.jmolecules.ddd.annotation.AggregateRoot;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Getter
 @SuperBuilder
-public class Home extends AggregateRoot<UUID> {
+@AggregateRoot
+public class Home extends BaseAggregateRoot<UUID> {
     private Long hostId;
     private Price pricePerNight;
     private Address address;
@@ -30,7 +32,7 @@ public class Home extends AggregateRoot<UUID> {
 
     private Home(UUID id , Long hostId, Price pricePerNight, Address address) {
         super(id, NAME);
-        raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).priceData(pricePerNight.toData()).addressData(address.toData()).build());
+        raiseEvent(HomeCreatedEvent.builder().aggregateId(id).hostId(hostId).priceEventData(pricePerNight.toData()).addressEventData(address.toData()).build());
     }
 
     public static Home createHome(CreateHomeCommand createHomeCommand) {
@@ -52,8 +54,8 @@ public class Home extends AggregateRoot<UUID> {
     private void apply(HomeCreatedEvent homeCreatedEvent) {
         this.id = homeCreatedEvent.getAggregateId();
         this.hostId = homeCreatedEvent.getHostId();
-        this.pricePerNight = homeCreatedEvent.getPriceData().toValueObject();
-        this.address = homeCreatedEvent.getAddressData().toValueObject();
+        this.pricePerNight = homeCreatedEvent.getPriceEventData().toValueObject();
+        this.address = homeCreatedEvent.getAddressEventData().toValueObject();
         this.reserveState = ReserveState.READY_TO_RESERVED;
     }
 
@@ -72,12 +74,23 @@ public class Home extends AggregateRoot<UUID> {
 
 
     public void update(UpdateHomeCommand updateHomeCommand) {
-        //TODO check validation
-        raiseEvent(HomeUpdatedEvent.builder().aggregateId(updateHomeCommand.getId()).price(updateHomeCommand.getPricePerNight().toData()).address(updateHomeCommand.getAddress().toData()).build());
+        if(Objects.isNull(updateHomeCommand))
+            throw new IllegalArgumentException("Update home command can't be null");
+        else if (Objects.isNull(updateHomeCommand.getPricePerNight()))
+            throw new IllegalArgumentException("Price per night can't be null");
+        else if (Objects.isNull(updateHomeCommand.getAddress()))
+            throw new IllegalArgumentException("Address can't be null");
+        raiseEvent(HomeUpdatedEvent.builder().aggregateId(updateHomeCommand.getId())
+                .price(updateHomeCommand.getPricePerNight().toData())
+                .address(updateHomeCommand.getAddress().toData())
+                .build());
     }
 
     public void delete(DeleteHomeCommand deleteHomeCommand) {
-        //TODO check validation
+        if(Objects.isNull(deleteHomeCommand))
+            throw new IllegalArgumentException("Update home command can't be null");
+        else if (Objects.isNull(deleteHomeCommand.getId()))
+            throw new IllegalArgumentException("Id can't be null");
         raiseEvent(HomeDeletedEvent.builder().aggregateId(deleteHomeCommand.getId()).build());
     }
 

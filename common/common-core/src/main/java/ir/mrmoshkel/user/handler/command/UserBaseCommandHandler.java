@@ -1,7 +1,7 @@
 package ir.mrmoshkel.user.handler.command;
 
 import ir.mrmoshkel.contract.EventSource;
-import ir.mrmoshkel.framework.command.CommandHandler;
+import ir.mrmoshkel.framework.command.BaseCommandHandler;
 import ir.mrmoshkel.user.command.CreateUserCommand;
 import ir.mrmoshkel.user.command.UpdateUserCommand;
 import ir.mrmoshkel.user.entity.User;
@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class UserCommandHandler implements CommandHandler {
+public class UserBaseCommandHandler implements BaseCommandHandler {
 
     private EventSource<User, UUID> eventSource;
 

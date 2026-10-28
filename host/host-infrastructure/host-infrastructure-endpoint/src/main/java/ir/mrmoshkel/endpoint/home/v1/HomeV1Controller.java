@@ -4,16 +4,8 @@ import ir.mrmoshkel.endpoint.home.v1.dto.HomeDto;
 import ir.mrmoshkel.endpoint.home.v1.mapper.HomeMapper;
 import ir.mrmoshkel.endpoint.validation.OnCreate;
 import ir.mrmoshkel.endpoint.validation.OnUpdate;
-import ir.mrmoshkel.home.command.DeleteHomeCommand;
-import ir.mrmoshkel.home.command.ReserveHomeCommand;
-import ir.mrmoshkel.home.command.UpdateHomeCommand;
-import ir.mrmoshkel.home.handler.command.home.command.handler.HomeCommandHandler;
+import ir.mrmoshkel.home.handler.command.home.command.handler.HomeBaseCommandHandler;
 import ir.mrmoshkel.home.handler.query.HomeQueryHandler;
-import ir.mrmoshkel.home.query.FindAllHomeQuery;
-import ir.mrmoshkel.home.query.FindByIdHomeQuery;
-import ir.mrmoshkel.home.valueobject.Address;
-import ir.mrmoshkel.valueobject.Price;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -32,12 +24,13 @@ import java.util.UUID;
 public class HomeV1Controller {
 
     //TODO command dispatcher to prevent inject many handlers
+    use OPEN CQRS
     private final HomeQueryHandler homeQueryHandler;
-    private final HomeCommandHandler homeCommandHandler;
+    private final HomeBaseCommandHandler homeCommandHandler;
 
     private final HomeMapper homeMapper;
 
-    public HomeV1Controller(HomeQueryHandler homeQueryHandler, HomeCommandHandler homeCommandHandler,
+    public HomeV1Controller(HomeQueryHandler homeQueryHandler, HomeBaseCommandHandler homeCommandHandler,
                             HomeMapper homeMapper) {
         this.homeQueryHandler = homeQueryHandler;
         this.homeCommandHandler = homeCommandHandler;

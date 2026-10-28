@@ -1,15 +1,17 @@
 package ir.mrmoshkel.home.event;
 
-import ir.mrmoshkel.home.event.data.AddressData;
-import ir.mrmoshkel.framework.event.data.PriceData;
+import ir.mrmoshkel.home.event.data.AddressEventData;
+import ir.mrmoshkel.framework.event.data.PriceEventData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.jmolecules.event.annotation.DomainEvent;
 
 @Getter
 @NoArgsConstructor
 @SuperBuilder
+@DomainEvent
 public class HomeUpdatedEvent extends HomeEvent {
-    private PriceData price;
-    private AddressData address;
+    private PriceEventData price;
+    private AddressEventData address;
 }

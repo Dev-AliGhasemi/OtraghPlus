@@ -23,6 +23,7 @@ public class HomeEventConsumer implements EventConsumer {
         homeEventHandler.handle(homeCreatedEvent);
     }
 
+
     @KafkaListener(topics = "HomeUpdatedEvent", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(@Payload HomeUpdatedEvent homeUpdatedEvent) {
         homeEventHandler.handle(homeUpdatedEvent);

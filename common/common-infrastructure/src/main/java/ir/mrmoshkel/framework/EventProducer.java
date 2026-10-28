@@ -1,9 +1,11 @@
 package ir.mrmoshkel.framework;
 
 import ir.mrmoshkel.framework.event.BaseEvent;
+import org.jmolecules.event.annotation.DomainEventPublisher;
 
 import java.util.concurrent.ExecutionException;
 
 public interface EventProducer {
-    void produce(String topic, BaseEvent baseEvent) throws ExecutionException, InterruptedException;
+    @DomainEventPublisher
+    <T> void produce(String topic, BaseEvent<T> baseEvent) throws ExecutionException, InterruptedException;
 }

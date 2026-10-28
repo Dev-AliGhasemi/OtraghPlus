@@ -4,7 +4,7 @@ import ir.mrmoshkel.framework.event.BaseEvent;
 import ir.mrmoshkel.framework.BaseEventModel;
 import ir.mrmoshkel.framework.EventProducer;
 import ir.mrmoshkel.framework.EventStore;
-import ir.mrmoshkel.framework.entity.AggregateRoot;
+import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.model.MongoEventModel;
 
 import java.sql.Date;
@@ -23,8 +23,8 @@ public class SimpleEventStore<AGG_ID> implements EventStore<AGG_ID> {
     }
 
     @Override
-    public void saveEvent(AggregateRoot<AGG_ID> aggregateRoot, List<BaseEvent<AGG_ID>> events, Long expectedVersion) {
-        List<MongoEventModel<AGG_ID>> mongoEventModels = baseEventStoreRepository.findByAggregateId(aggregateRoot.getId());
+    public void saveEvent(BaseAggregateRoot<AGG_ID> baseAggregateRoot, List<BaseEvent<AGG_ID>> events, Long expectedVersion) {
+        List<MongoEventModel<AGG_ID>> mongoEventModels = baseEventStoreRepository.findByAggregateId(baseAggregateRoot.getId());
         if (Objects.isNull(mongoEventModels) || (!mongoEventModels.isEmpty() && mongoEventModels.get(mongoEventModels.size() - 1).getVersion() != expectedVersion))
             throw new RuntimeException("Concurrency error");
         long version = expectedVersion == null ? 0 : expectedVersion;
@@ -33,9 +33,9 @@ public class SimpleEventStore<AGG_ID> implements EventStore<AGG_ID> {
             baseEvent.setVersion(version);
             MongoEventModel<AGG_ID> mongoEventModel = MongoEventModel.<AGG_ID>builder()
                     .timestamp(new Date(System.currentTimeMillis()))
-                    .aggregateId(aggregateRoot.getId())
+                    .aggregateId(baseAggregateRoot.getId())
                     .version(version)
-                    .aggregateType(aggregateRoot.getClass().getTypeName())
+                    .aggregateType(baseAggregateRoot.getClass().getTypeName())
                     .eventType(baseEvent.getClass().getTypeName())
                     .eventData(baseEvent)
                     .build();

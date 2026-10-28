@@ -2,12 +2,13 @@ package ir.mrmoshkel.persistence.home.repository;
 
 import ir.mrmoshkel.home.enumeration.ReserveState;
 import ir.mrmoshkel.home.model.HomeModel;
-import ir.mrmoshkel.home.repository.HomeRepository;
-import ir.mrmoshkel.persistence.framework.RepositoryAdapter;
+import ir.mrmoshkel.home.repository.HomeBaseRepository;
+import ir.mrmoshkel.persistence.framework.JpaRepositoryAdapter;
 import ir.mrmoshkel.persistence.home.entity.HomeEntity;
 import ir.mrmoshkel.persistence.home.mapper.HomeJpaMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +17,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Component
-public class HomeRepositoryAdapter extends RepositoryAdapter<HomeEntity, UUID, HomeJpaMapper> implements HomeRepository {
+@Repository
+@org.jmolecules.ddd.annotation.Repository
+public class HomeJpaBaseRepositoryAdapter extends JpaRepositoryAdapter<HomeEntity, UUID, HomeJpaMapper> implements HomeBaseRepository {
 
-    public HomeRepositoryAdapter(HomeJpaRepository homeJpaRepository) {
+    public HomeJpaBaseRepositoryAdapter(HomeJpaRepository homeJpaRepository) {
         super(homeJpaRepository, HomeJpaMapper.INSTANCE);
     }
 
