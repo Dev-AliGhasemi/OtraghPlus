@@ -1,8 +1,8 @@
 package ir.mrmoshkel.bootstrap;
 
-import ir.mrmoshkel.config.CommonInfrastructureConfig;
-import ir.mrmoshkel.endpoint.config.EndpointConfig;
-import ir.mrmoshkel.persistence.config.PersistenceConfig;
+import ir.mrmoshkel.common.infrastructure.config.CommonInfrastructureConfig;
+import ir.mrmoshkel.host.infrastructure.endpoint.config.EndpointConfig;
+import ir.mrmoshkel.host.infrastructure.persistence.config.PersistenceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;

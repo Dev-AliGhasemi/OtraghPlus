@@ -6,3 +6,4 @@ spring:
       - liquibase
       - kafka
       - otragh
+      - axon

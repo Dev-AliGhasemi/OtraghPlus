@@ -1,0 +1,13 @@
+package ir.mrmoshkel.host.core.domain.home.event;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.jmolecules.event.annotation.DomainEvent;
+
+@Getter
+@NoArgsConstructor
+@SuperBuilder
+@DomainEvent
+public class HomeReservedEvent extends HomeEvent {
+}

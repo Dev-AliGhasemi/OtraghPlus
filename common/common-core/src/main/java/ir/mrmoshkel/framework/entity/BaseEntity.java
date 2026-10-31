@@ -2,12 +2,15 @@ package ir.mrmoshkel.framework.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.jmolecules.ddd.annotation.Entity;
+import org.jmolecules.ddd.annotation.Identity;
 
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SuperBuilder
 public abstract class BaseEntity<ID> {
     @EqualsAndHashCode.Include
+    @Identity
     protected ID id;
     @EqualsAndHashCode.Include
     protected String name;

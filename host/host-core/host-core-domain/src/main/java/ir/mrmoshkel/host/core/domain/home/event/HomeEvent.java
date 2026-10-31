@@ -1,0 +1,14 @@
+package ir.mrmoshkel.host.core.domain.home.event;
+
+import ir.mrmoshkel.framework.event.BaseEvent;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.jmolecules.event.annotation.DomainEvent;
+
+import java.util.UUID;
+
+@NoArgsConstructor
+@SuperBuilder
+@DomainEvent
+public class HomeEvent extends BaseEvent<UUID> {
+}

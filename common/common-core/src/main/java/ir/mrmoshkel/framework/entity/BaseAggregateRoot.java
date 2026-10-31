@@ -4,6 +4,8 @@ package ir.mrmoshkel.framework.entity;
 import ir.mrmoshkel.framework.event.BaseEvent;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.jmolecules.ddd.annotation.AggregateRoot;
+import org.jmolecules.ddd.annotation.Identity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,11 +25,18 @@ public abstract class BaseAggregateRoot<ID> extends BaseEntity<ID> {
 
     protected BaseAggregateRoot(ID id, String name) {
         super(id, name);
+        events = new ArrayList<>();
     }
 
 
     public void markEventsAsCommited() {
         events.clear();
+    }
+
+    @Identity
+    @Override
+    public ID getId() {
+        return super.getId();
     }
 
     protected void raiseEvent(BaseEvent<ID> baseEvent) {

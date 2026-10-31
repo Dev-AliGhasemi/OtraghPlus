@@ -1,6 +1,7 @@
 package ir.mrmoshkel.framework.repository;
 
 import ir.mrmoshkel.framework.model.DataModel;
+import org.jmolecules.ddd.annotation.Repository;
 
 import java.util.List;
 import java.util.Optional;
