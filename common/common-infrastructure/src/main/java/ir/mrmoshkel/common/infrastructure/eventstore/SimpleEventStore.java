@@ -1,10 +1,10 @@
 package ir.mrmoshkel.common.infrastructure.eventstore;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import ir.mrmoshkel.common.infrastructure.framework.BaseEventModel;
 import ir.mrmoshkel.common.infrastructure.framework.EventProducer;
 import ir.mrmoshkel.common.infrastructure.framework.EventStore;
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.common.infrastructure.model.MongoEventModel;
 
 import java.sql.Date;

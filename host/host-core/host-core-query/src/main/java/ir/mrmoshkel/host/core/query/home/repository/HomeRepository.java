@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.query.home.repository;
 
-import ir.mrmoshkel.framework.repository.BaseRepository;
+import ir.mrmoshkel.common.core.framework.repository.BaseRepository;
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
 
 import java.util.UUID;

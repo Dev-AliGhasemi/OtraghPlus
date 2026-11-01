@@ -1,8 +1,8 @@
 package ir.mrmoshkel.common.infrastructure.commanddispatcher;
 
 import ir.mrmoshkel.common.infrastructure.framework.CommandDispatcher;
-import ir.mrmoshkel.framework.command.BaseCommand;
-import ir.mrmoshkel.framework.command.CommandConsumer;
+import ir.mrmoshkel.common.core.framework.command.BaseCommand;
+import ir.mrmoshkel.common.core.framework.command.CommandConsumer;
 
 import java.util.HashMap;
 import java.util.Map;

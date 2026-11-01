@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.host.entity;
 
-import ir.mrmoshkel.user.entity.User;
+import ir.mrmoshkel.common.core.user.entity.User;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

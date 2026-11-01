@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.valueobject;
 
-import ir.mrmoshkel.framework.valueobject.BaseValueObject;
+import ir.mrmoshkel.common.core.framework.valueobject.BaseValueObject;
 import ir.mrmoshkel.host.core.domain.home.event.data.AddressEventData;
 import lombok.*;
 import org.jmolecules.ddd.annotation.ValueObject;

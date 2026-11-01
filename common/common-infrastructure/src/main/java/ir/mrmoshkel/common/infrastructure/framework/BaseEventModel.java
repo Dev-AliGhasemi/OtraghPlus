@@ -1,6 +1,6 @@
 package ir.mrmoshkel.common.infrastructure.framework;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

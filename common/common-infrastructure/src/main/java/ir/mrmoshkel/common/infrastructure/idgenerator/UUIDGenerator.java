@@ -1,6 +1,6 @@
 package ir.mrmoshkel.common.infrastructure.idgenerator;
 
-import ir.mrmoshkel.contract.IdGenerator;
+import ir.mrmoshkel.common.core.contract.IdGenerator;
 
 import java.util.UUID;
 

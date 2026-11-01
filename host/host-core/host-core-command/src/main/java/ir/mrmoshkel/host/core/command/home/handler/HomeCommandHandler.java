@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.command.home.handler;
 
-import ir.mrmoshkel.framework.command.BaseCommandHandler;
+import ir.mrmoshkel.common.core.framework.command.BaseCommandHandler;
 import ir.mrmoshkel.host.core.domain.home.command.CreateHomeCommand;
 import ir.mrmoshkel.host.core.domain.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.host.core.domain.home.command.ReserveHomeCommand;

@@ -1,6 +1,6 @@
 package ir.mrmoshkel.common.infrastructure.eventproducer;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import ir.mrmoshkel.common.infrastructure.framework.EventProducer;
 import org.jmolecules.event.annotation.DomainEventPublisher;
 import org.springframework.kafka.core.KafkaTemplate;

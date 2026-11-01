@@ -1,10 +1,10 @@
 package ir.mrmoshkel.common.infrastructure.eventsource;
 
-import ir.mrmoshkel.contract.EventSource;
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.contract.EventSource;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import ir.mrmoshkel.common.infrastructure.framework.EventProducer;
 import ir.mrmoshkel.common.infrastructure.framework.EventStore;
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
 
 import java.util.List;
 import java.util.Objects;

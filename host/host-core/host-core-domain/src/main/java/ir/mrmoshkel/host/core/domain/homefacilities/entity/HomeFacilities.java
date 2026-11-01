@@ -1,9 +1,9 @@
 package ir.mrmoshkel.host.core.domain.homefacilities.entity;
 
 import ir.mrmoshkel.host.core.domain.facilities.entity.Facilities;
-import ir.mrmoshkel.framework.entity.BaseEntity;
+import ir.mrmoshkel.common.core.framework.entity.BaseEntity;
 import ir.mrmoshkel.host.core.domain.home.entity.Home;
-import ir.mrmoshkel.valueobject.Price;
+import ir.mrmoshkel.common.core.valueobject.Price;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

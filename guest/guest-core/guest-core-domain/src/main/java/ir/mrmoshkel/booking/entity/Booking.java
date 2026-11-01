@@ -1,8 +1,8 @@
 package ir.mrmoshkel.booking.entity;
 
 import ir.mrmoshkel.booking.valueobject.DateRange;
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
-import ir.mrmoshkel.valueobject.Price;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.valueobject.Price;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

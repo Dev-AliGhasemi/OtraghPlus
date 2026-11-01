@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.command;
 
-import ir.mrmoshkel.framework.command.BaseCommand;
+import ir.mrmoshkel.common.core.framework.command.BaseCommand;
 import lombok.experimental.SuperBuilder;
 import org.jmolecules.architecture.cqrs.Command;
 

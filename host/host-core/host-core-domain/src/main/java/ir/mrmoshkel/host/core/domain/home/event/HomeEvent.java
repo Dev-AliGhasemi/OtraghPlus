@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.event;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.jmolecules.event.annotation.DomainEvent;

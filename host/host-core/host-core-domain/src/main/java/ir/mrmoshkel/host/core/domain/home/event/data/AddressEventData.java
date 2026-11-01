@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.event.data;
 
-import ir.mrmoshkel.framework.event.data.BaseEventData;
+import ir.mrmoshkel.common.core.framework.event.data.BaseEventData;
 import ir.mrmoshkel.host.core.domain.home.valueobject.Address;
 import lombok.*;
 

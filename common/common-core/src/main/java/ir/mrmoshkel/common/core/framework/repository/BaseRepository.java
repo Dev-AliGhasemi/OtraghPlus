@@ -1,0 +1,16 @@
+package ir.mrmoshkel.common.core.framework.repository;
+
+import ir.mrmoshkel.common.core.framework.model.DataModel;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface BaseRepository<T extends DataModel<ID> ,ID> {
+    Optional<T> findById(ID id);
+    List<T> findAll();
+    List<T> findAll(Long offset, Integer pageSize);
+    void save(T t);
+    void save(T t, boolean isNew);
+    void delete(T t);
+    void deleteById(ID id);
+}

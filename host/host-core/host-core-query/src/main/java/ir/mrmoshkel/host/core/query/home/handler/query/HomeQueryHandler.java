@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.query.home.handler.query;
 
-import ir.mrmoshkel.framework.query.BaseQueryHandler;
+import ir.mrmoshkel.common.core.framework.query.BaseQueryHandler;
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
 import ir.mrmoshkel.host.core.domain.home.query.FindAllHomeQuery;
 import ir.mrmoshkel.host.core.domain.home.query.FindByIdHomeQuery;

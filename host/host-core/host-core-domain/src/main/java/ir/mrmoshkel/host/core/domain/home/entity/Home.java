@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.entity;
 
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.host.core.domain.home.command.CreateHomeCommand;
 import ir.mrmoshkel.host.core.domain.home.command.DeleteHomeCommand;
 import ir.mrmoshkel.host.core.domain.home.command.ReserveHomeCommand;
@@ -11,10 +11,12 @@ import ir.mrmoshkel.host.core.domain.home.event.HomeDeletedEvent;
 import ir.mrmoshkel.host.core.domain.home.event.HomeReservedEvent;
 import ir.mrmoshkel.host.core.domain.home.event.HomeUpdatedEvent;
 import ir.mrmoshkel.host.core.domain.home.valueobject.Address;
-import ir.mrmoshkel.valueobject.Price;
+import ir.mrmoshkel.common.core.user.entity.User;
+import ir.mrmoshkel.common.core.valueobject.Price;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import org.jmolecules.ddd.annotation.AggregateRoot;
+import org.jmolecules.ddd.annotation.Association;
 import org.jmolecules.ddd.annotation.Identity;
 
 import java.util.Objects;
@@ -24,6 +26,7 @@ import java.util.UUID;
 @SuperBuilder
 @AggregateRoot
 public class Home extends BaseAggregateRoot<UUID> {
+    @Association(aggregateType = User.class)
     private Long hostId;
     private Price pricePerNight;
     private Address address;

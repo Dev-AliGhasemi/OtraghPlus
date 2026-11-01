@@ -1,9 +1,9 @@
 package ir.mrmoshkel.host.core.query.home.model;
 
-import ir.mrmoshkel.framework.model.DataModel;
+import ir.mrmoshkel.common.core.framework.model.DataModel;
 import ir.mrmoshkel.host.core.domain.home.enumeration.ReserveState;
 import ir.mrmoshkel.host.core.domain.home.valueobject.Address;
-import ir.mrmoshkel.valueobject.Price;
+import ir.mrmoshkel.common.core.valueobject.Price;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

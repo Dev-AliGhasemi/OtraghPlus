@@ -1,6 +1,6 @@
 package ir.mrmoshkel.common.infrastructure.framework;
 
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 import org.jmolecules.event.annotation.DomainEventPublisher;
 
 import java.util.concurrent.ExecutionException;

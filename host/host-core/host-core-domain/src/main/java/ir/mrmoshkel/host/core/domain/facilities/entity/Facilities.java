@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.facilities.entity;
 
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
 import ir.mrmoshkel.host.core.domain.homefacilities.entity.HomeFacilities;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

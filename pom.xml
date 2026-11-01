@@ -12,6 +12,7 @@
         <module>guest</module>
         <module>management</module>
         <module>common</module>
+        <module>bootstrap</module>
     </modules>
 
     <properties>
@@ -35,24 +36,6 @@
             <artifactId>jmolecules-starter-ddd</artifactId>
             <version>${jmolecules.version}</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jmolecules.integrations</groupId>
-            <artifactId>jmolecules-starter-test</artifactId>
-            <version>${jmolecules.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jmolecules.integrations</groupId>
-            <artifactId>jmolecules-archunit</artifactId>
-            <version>${jmolecules.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.tngtech.archunit</groupId>
-            <artifactId>archunit-junit5</artifactId>
-            <version>${archunit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmolecules</groupId>

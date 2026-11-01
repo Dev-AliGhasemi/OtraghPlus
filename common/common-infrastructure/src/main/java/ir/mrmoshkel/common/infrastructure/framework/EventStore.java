@@ -1,7 +1,7 @@
 package ir.mrmoshkel.common.infrastructure.framework;
 
-import ir.mrmoshkel.framework.entity.BaseAggregateRoot;
-import ir.mrmoshkel.framework.event.BaseEvent;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.framework.event.BaseEvent;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package ir.mrmoshkel.host.core.domain.home.query;
 
-import ir.mrmoshkel.framework.query.BaseQuery;
+import ir.mrmoshkel.common.core.framework.query.BaseQuery;
 import lombok.experimental.SuperBuilder;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
