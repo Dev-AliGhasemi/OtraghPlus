@@ -1,0 +1,7 @@
+axon:
+  tracing:
+    event-store:
+      enabled: false
+  eventstorage:
+    jpa:
+      polling-interval: 0

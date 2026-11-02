@@ -1,18 +1,15 @@
 package ir.mrmoshkel.booking.entity;
 
 import ir.mrmoshkel.booking.valueobject.DateRange;
-import ir.mrmoshkel.framework.entity.AggregateRoot;
-import ir.mrmoshkel.valueobject.Price;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import ir.mrmoshkel.common.core.framework.entity.BaseAggregateRoot;
+import ir.mrmoshkel.common.core.valueobject.Price;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Booking extends AggregateRoot<Long> {
+@SuperBuilder
+
+public class Booking extends BaseAggregateRoot<Long> {
     private Long guestId;
     private Long homeId;
     private Price pricePerDay;
@@ -20,4 +17,8 @@ public class Booking extends AggregateRoot<Long> {
     private BookingStatus bookingStatus;
     private DateRange duration;
 
+    @Override
+    public String getName() {
+        return "BOOKING";
+    }
 }

@@ -1,0 +1,20 @@
+package ir.mrmoshkel.host.infrastructure.persistence.home.entity;
+
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AddressEmbeddable {
+    private String country;
+    private String city;
+    private String street;
+    private String postalCode;
+    private String houseNumber;
+}

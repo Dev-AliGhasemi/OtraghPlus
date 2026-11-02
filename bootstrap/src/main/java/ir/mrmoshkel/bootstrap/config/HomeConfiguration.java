@@ -1,46 +1,56 @@
 package ir.mrmoshkel.bootstrap.config;
 
-import ir.mrmoshkel.contract.EventSource;
-import ir.mrmoshkel.eventproducer.KafkaEventProducer;
-import ir.mrmoshkel.eventsource.SimpleEventSource;
-import ir.mrmoshkel.eventstore.EventStoreRepository;
-import ir.mrmoshkel.eventstore.SimpleEventStore;
-import ir.mrmoshkel.framework.EventHandler;
-import ir.mrmoshkel.framework.EventProducer;
-import ir.mrmoshkel.framework.EventStore;
-import ir.mrmoshkel.home.entity.Home;
-import ir.mrmoshkel.home.handler.command.home.command.handler.HomeCommandHandler;
-import ir.mrmoshkel.home.handler.event.HomeEventHandler;
-import ir.mrmoshkel.home.handler.query.HomeQueryHandler;
-import ir.mrmoshkel.persistence.home.repository.HomeRepositoryAdapter;
+import ir.mrmoshkel.common.core.contract.EventSource;
+import ir.mrmoshkel.common.core.contract.IdGenerator;
+import ir.mrmoshkel.common.infrastructure.eventsource.SimpleEventSource;
+import ir.mrmoshkel.common.infrastructure.eventstore.BaseEventStoreRepository;
+import ir.mrmoshkel.common.infrastructure.eventstore.SimpleEventStore;
+import ir.mrmoshkel.common.infrastructure.framework.EventProducer;
+import ir.mrmoshkel.common.infrastructure.framework.EventStore;
+import ir.mrmoshkel.host.core.command.home.handler.HomeCommandHandler;
+import ir.mrmoshkel.host.core.domain.home.entity.Home;
+import ir.mrmoshkel.host.core.command.home.handler.HomeCommandHandlerImpl;
+import ir.mrmoshkel.host.core.query.home.handler.event.HomeEventHandlerImpl;
+import ir.mrmoshkel.host.core.query.home.handler.query.HomeQueryHandler;
+import ir.mrmoshkel.common.infrastructure.idgenerator.UUIDGenerator;
+import ir.mrmoshkel.host.core.query.home.handler.query.HomeQueryHandlerImpl;
+import ir.mrmoshkel.host.core.query.home.repository.HomeRepository;
+import ir.mrmoshkel.host.infrastructure.persistence.home.repository.HomeJpaRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.UUID;
 
 @Configuration
 public class HomeConfiguration {
     @Bean
-    public HomeQueryHandler homeQueryHandler(HomeRepositoryAdapter homeRepositoryAdapter) {
-        return new HomeQueryHandler(homeRepositoryAdapter);
+    public HomeQueryHandler homeQueryHandler(HomeRepository homeRepository) {
+        return new HomeQueryHandlerImpl(homeRepository);
     }
 
     @Bean
-    public HomeCommandHandler homeCommandHandler(EventSource<Home,Long> eventSource) {
-        return new HomeCommandHandler(eventSource);
+    public HomeCommandHandler homeCommandHandler(EventSource<Home,UUID> eventSource, IdGenerator<UUID> idGenerator) {
+        return new HomeCommandHandlerImpl(eventSource, idGenerator);
     }
 
     @Bean
-    public EventSource<Home,Long> homeEventSource(EventStore eventStore, EventProducer eventProducer) {
-        return new SimpleEventSource<>(eventStore, eventProducer);
+    public IdGenerator<UUID> uuidGenerator() {
+        return new UUIDGenerator();
     }
 
     @Bean
-    public HomeEventHandler homeEventHandler(HomeRepositoryAdapter homeRepositoryAdapter) {
-        return new HomeEventHandler(homeRepositoryAdapter);
+    public EventSource<Home,UUID> homeEventSource(EventStore<UUID> eventStore, EventProducer eventProducer) {
+        return new SimpleEventSource<Home, UUID>(eventStore, eventProducer, () -> Home.builder().build());
     }
 
     @Bean
-    public EventStore eventStore(EventStoreRepository eventStoreRepository, EventProducer eventProducer) {
-        return new SimpleEventStore(eventStoreRepository, eventProducer);
+    public HomeEventHandlerImpl homeEventHandler(HomeJpaRepositoryAdapter homeRepositoryAdapter) {
+        return new HomeEventHandlerImpl(homeRepositoryAdapter);
+    }
+
+    @Bean
+    public EventStore<UUID> eventStore(BaseEventStoreRepository<UUID> baseEventStoreRepository, EventProducer eventProducer) {
+        return new SimpleEventStore<UUID>(baseEventStoreRepository, eventProducer);
     }
 
 

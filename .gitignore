@@ -38,3 +38,7 @@ build/
 ### Mac OS ###
 ._*
 .DS_Store
+
+### Project ###
+*-develop*
+*_develop*
