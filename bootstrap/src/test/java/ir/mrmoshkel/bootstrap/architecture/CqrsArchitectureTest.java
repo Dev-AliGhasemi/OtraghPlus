@@ -11,19 +11,19 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
         packages = "ir.mrmoshkel",
         importOptions = ImportOption.DoNotIncludeTests.class
 )
-class CqrsArchitectureTest {
+public class CqrsArchitectureTest {
 
     @ArchTest
     static final ArchRule commandMustNotDependOnQuery =
             noClasses()
-                    .that().resideInAPackage("..application.command..")
+                    .that().resideInAPackage("..core.command..")
                     .should().dependOnClassesThat()
-                    .resideInAPackage("..application.query..");
+                    .resideInAPackage("..core.query..");
 
     @ArchTest
     static final ArchRule queryMustNotDependOnCommand =
             noClasses()
-                    .that().resideInAPackage("..application.query..")
+                    .that().resideInAPackage("..core.query..")
                     .should().dependOnClassesThat()
-                    .resideInAPackage("..application.command..");
+                    .resideInAPackage("..core.command..");
 }

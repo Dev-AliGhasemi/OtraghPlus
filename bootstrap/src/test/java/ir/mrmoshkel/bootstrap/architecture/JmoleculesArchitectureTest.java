@@ -10,7 +10,7 @@ import org.jmolecules.archunit.JMoleculesDddRules;
         packages = "ir.mrmoshkel",
         importOptions = ImportOption.DoNotIncludeTests.class
 )
-class JmoleculesArchitectureTest {
+public class JmoleculesArchitectureTest {
 
     @ArchTest
     void verifyDddRules(JavaClasses classes) {

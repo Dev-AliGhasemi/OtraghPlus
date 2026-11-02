@@ -14,7 +14,7 @@ import static com.tngtech.archunit.library.Architectures.onionArchitecture;
         packages = "ir.mrmoshkel",
         importOptions = ImportOption.DoNotIncludeTests.class
 )
-class LayerArchitectureTest {
+public class LayerArchitectureTest {
 
     @ArchTest
     static final ArchRule onlyBootstrapCanBeDependedOnByBootstrap =

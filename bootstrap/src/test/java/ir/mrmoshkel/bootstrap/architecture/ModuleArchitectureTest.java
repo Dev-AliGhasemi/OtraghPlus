@@ -10,7 +10,7 @@ import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.sli
         packages = "ir.mrmoshkel",
         importOptions = ImportOption.DoNotIncludeTests.class
 )
-class ModuleArchitectureTest {
+public class ModuleArchitectureTest {
 
     @ArchTest
     static final com.tngtech.archunit.lang.ArchRule modulesMustNotHaveCycles =
