@@ -45,6 +45,11 @@ public class HomeJpaRepositoryAdapter extends JpaRepositoryAdapter<HomeEntity, U
     }
 
     @Override
+    public long countAll() {
+        return getRepository().count();
+    }
+
+    @Override
     public void save(HomeModel homeModel, boolean isNew) {
         HomeEntity homeEntity = getMapper().toEntity(homeModel);
         homeEntity.setNew(isNew);

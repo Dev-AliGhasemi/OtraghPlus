@@ -4,6 +4,7 @@ import ir.mrmoshkel.common.core.framework.query.BaseQueryHandler;
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
 import ir.mrmoshkel.host.core.domain.home.query.FindAllHomeQuery;
 import ir.mrmoshkel.host.core.domain.home.query.FindByIdHomeQuery;
+import ir.mrmoshkel.host.core.domain.home.query.CountAllHomesQuery;
 
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface HomeQueryHandler extends BaseQueryHandler {
 
     List<HomeModel> handle(FindAllHomeQuery findAllHomeQuery);
     HomeModel handle(FindByIdHomeQuery findByIdHomeQuery);
+    long handle(CountAllHomesQuery countAllHomesQuery);
 
 }
