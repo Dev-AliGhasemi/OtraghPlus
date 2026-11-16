@@ -2,6 +2,7 @@ package ir.mrmoshkel.host.infrastructure.endpoint.dispathcer;
 
 import ir.mrmoshkel.host.core.domain.home.query.FindAllHomeQuery;
 import ir.mrmoshkel.host.core.domain.home.query.FindByIdHomeQuery;
+import ir.mrmoshkel.host.core.domain.home.query.CountAllHomesQuery;
 import ir.mrmoshkel.host.core.query.home.handler.query.HomeQueryHandler;
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,11 @@ public class AxonHomeQueryHandlerImpl implements HomeQueryHandler {
     @QueryHandler
     public HomeModel handle(FindByIdHomeQuery findByIdHomeQuery) {
         return homeQueryHandler.handle(findByIdHomeQuery);
+    }
+
+    @Override
+    @QueryHandler
+    public long handle(CountAllHomesQuery countAllHomesQuery) {
+        return homeQueryHandler.handle(countAllHomesQuery);
     }
 }

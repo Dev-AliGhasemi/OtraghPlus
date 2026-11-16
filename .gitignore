@@ -42,3 +42,4 @@ build/
 ### Project ###
 *-develop*
 *_develop*
+.env

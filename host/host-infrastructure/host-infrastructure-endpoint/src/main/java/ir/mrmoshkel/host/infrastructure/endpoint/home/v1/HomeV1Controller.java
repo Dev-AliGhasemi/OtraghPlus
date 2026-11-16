@@ -1,6 +1,7 @@
 package ir.mrmoshkel.host.infrastructure.endpoint.home.v1;
 
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
+import ir.mrmoshkel.host.core.domain.home.query.CountAllHomesQuery;
 import ir.mrmoshkel.host.infrastructure.endpoint.home.v1.dto.HomeDto;
 import ir.mrmoshkel.host.infrastructure.endpoint.home.v1.mapper.HomeMapper;
 import ir.mrmoshkel.host.infrastructure.endpoint.validation.OnCreate;
@@ -34,9 +35,9 @@ public class HomeV1Controller {
     @GetMapping("/list")
     public CompletableFuture<ResponseEntity<Page<HomeDto>>> findAll(@PageableDefault(size = 20) @SortDefault(sort = "hostId", direction = Sort.Direction.ASC) Pageable pageable) {
         return queryGateway.queryMany(homeMapper.toFindAllHomeQuery(pageable.getOffset(), pageable.getPageSize()), HomeModel.class)
-                .thenApply(homeModels -> {
+                .thenCombine(queryGateway.query(new CountAllHomesQuery(), Long.class), (homeModels, total) -> {
                     List<HomeDto> list = homeModels.stream().map(HomeMapper.INSTANCE::toHomeDto).toList();
-                    return ResponseEntity.ok(new PageImpl<>(list, pageable, list.size()));
+                    return ResponseEntity.ok(new PageImpl<>(list, pageable, total));
                 });
     }
 
@@ -46,22 +47,26 @@ public class HomeV1Controller {
     }
 
     @PostMapping
-    public void createHome(@Validated(OnCreate.class) @RequestBody HomeDto homeDto) {
-        commandGateway.send(homeMapper.toCreateHomeCommand(homeDto));
+    public CompletableFuture<ResponseEntity<Void>> createHome(@Validated(OnCreate.class) @RequestBody HomeDto homeDto) {
+        return commandGateway.send(homeMapper.toCreateHomeCommand(homeDto), Void.class)
+                .thenApply(ignored -> ResponseEntity.noContent().build());
     }
 
     @DeleteMapping("/{homeId}")
-    public void deleteHome(@PathVariable("homeId") UUID homeId) {
-        commandGateway.send(homeMapper.toDeleteHomeCommand(homeId));
+    public CompletableFuture<ResponseEntity<Void>> deleteHome(@PathVariable("homeId") UUID homeId) {
+        return commandGateway.send(homeMapper.toDeleteHomeCommand(homeId), Void.class)
+                .thenApply(ignored -> ResponseEntity.noContent().build());
     }
 
     @PutMapping("/reserve/{homeId}")
-    public void reserveHome(@PathVariable("homeId") UUID homeId) {
-        commandGateway.send(homeMapper.toReserveHomeCommand(homeId));
+    public CompletableFuture<ResponseEntity<Void>> reserveHome(@PathVariable("homeId") UUID homeId) {
+        return commandGateway.send(homeMapper.toReserveHomeCommand(homeId), Void.class)
+                .thenApply(ignored -> ResponseEntity.noContent().build());
     }
 
     @PutMapping("/{homeId}")
-    public void updateHome(@PathVariable("homeId") UUID homeId, @Validated(OnUpdate.class) @RequestBody HomeDto homeDto) {
-        commandGateway.send(homeMapper.toUpdateHomeCommand(homeDto, homeId));
+    public CompletableFuture<ResponseEntity<Void>> updateHome(@PathVariable("homeId") UUID homeId, @Validated(OnUpdate.class) @RequestBody HomeDto homeDto) {
+        return commandGateway.send(homeMapper.toUpdateHomeCommand(homeDto, homeId), Void.class)
+                .thenApply(ignored -> ResponseEntity.noContent().build());
     }
 }

@@ -2,6 +2,7 @@ package ir.mrmoshkel.host.core.query.home.handler.query;
 
 import ir.mrmoshkel.host.core.domain.home.query.FindAllHomeQuery;
 import ir.mrmoshkel.host.core.domain.home.query.FindByIdHomeQuery;
+import ir.mrmoshkel.host.core.domain.home.query.CountAllHomesQuery;
 import ir.mrmoshkel.host.core.query.home.model.HomeModel;
 import ir.mrmoshkel.host.core.query.home.repository.HomeRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ public class HomeQueryHandlerImpl implements HomeQueryHandler {
     public HomeModel handle(FindByIdHomeQuery findByIdHomeQuery) {
         return homeRepository.findById(findByIdHomeQuery.getId())
                 .orElseThrow(() -> new RuntimeException("No entity found with id " + findByIdHomeQuery.getId()));
+    }
+
+    @Override
+    public long handle(CountAllHomesQuery countAllHomesQuery) {
+        return homeRepository.countAll();
     }
 
 

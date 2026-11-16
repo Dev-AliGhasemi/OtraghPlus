@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface HomeRepository extends BaseRepository<HomeModel, UUID> {
     void reserve(HomeModel homeModel);
+    long countAll();
 }
